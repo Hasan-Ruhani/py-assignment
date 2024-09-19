@@ -1,37 +1,51 @@
-print("Select operation:\n1. Add\n2. Subtract\n3. Multiply\n4. Divide\n5. Modulus")
-choice = int(input('Enter choice(1/2/3/4/5): '))
-x = int(input('Enter first number: ' ))
-y = int(input('Enter second number: ' ))
 
-if choice == 1:
-    def add():
-        print (x + y)
-    add()
+def calculate(result):
+    return (result)
 
-elif choice == 2:
-    def subtract():
-        print(x - y) 
-    subtract()
+while True:
+    try:
+        print("Select operation:\n1. Add\n2. Subtract\n3. Multiply\n4. Divide\n5. Modulus")
+        choice = int(input('Enter choice (1/2/3/4/5): '))
 
-elif choice == 3:
-    def multiply():
-        print(x * y)
-    multiply()
+        if choice <= 0 or choice >= 6:
+            print('Please choose 1-5 only')
+            continue
 
-elif choice == 4:
-    def divide():
-        print(x / y)
-    divide()
+        while True:
+            try:
+                x = float(input("Enter first number: "))
+                break
+            except ValueError:
+                print("Please input a valid number only.")
 
-elif choice == 5:
-    def modulus():
-        print(x % y)
-    modulus()
+        while True:
+            try:
+                y = float(input("Enter second number: "))
+                break
+            except ValueError:
+                print("Please input a valid number only.")
 
-else:
-    print('invalid choice')
+        if choice == 1:
+            print(f"Addition => {x} + {y} = {calculate(x + y)}")
 
+        elif choice == 2:
+            print(f"Subtraction => {x} - {y} = {calculate(x - y)}")
 
+        elif choice == 3:
+            print(f"Multiplication => {x} * {y} = {calculate(x * y)}")
 
+        elif choice == 4:
+            if y == 0:
+                print(f"Error: Division by '{int(y)}' is not allowed.")
+            else:
+                print(f"Division => {x} / {y} = {calculate(x / y)}")
 
+        elif choice == 5:
+            if y == 0:
+                print(f"Error: Modulus by '{int(y)}' is not allowed.")
+            else:
+                print(f"Modulus => {x} % {y} = {calculate(x % y)}")
+        break
 
+    except ValueError:
+        print("Error: Please input valid numbers.")
