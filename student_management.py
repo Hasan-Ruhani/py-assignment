@@ -1,6 +1,5 @@
 import json
 
-# Class 1: Person
 class Person:
     def __init__(self, name, age, address):
         self.name = name
@@ -10,7 +9,6 @@ class Person:
     def display_person_info(self):
         print(f"Name: {self.name}, Age: {self.age}, Address: {self.address}")
 
-# Class 2: Student (inherits from Person)
 class Student(Person):
     def __init__(self, name, age, address, student_id):
         super().__init__(name, age, address)
@@ -30,7 +28,6 @@ class Student(Person):
         print(f"Enrolled Courses: {', '.join(self.courses) if self.courses else 'No courses enrolled'}")
         print(f"Grades: {self.grades if self.grades else 'No grades assigned'}")
 
-# Class 3: Course
 class Course:
     def __init__(self, course_name, course_code, instructor):
         self.course_name = course_name
@@ -46,7 +43,6 @@ class Course:
         print(f"Enrolled Students: {', '.join([student.name for student in self.students]) if self.students else 'No students enrolled'}")
 
 
-# System Management
 class StudentManagementSystem:
     def __init__(self):
         self.students = {}
@@ -174,7 +170,7 @@ class StudentManagementSystem:
                 print("Invalid option. Please try again.")
 
 
-# Initialize and run the system
+
 if __name__ == "__main__":
     system = StudentManagementSystem()
     system.main_menu()
