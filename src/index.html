@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./output.css" rel="stylesheet" />
+    <title>Shopping Cart</title>
+  </head>
+  <body class="bg-gray-800 text-white font-mono">
+    <header>
+      <div class="bg-gray-600 w-full rounded-b-xl shadow-yellow-500">
+        <div class="container mx-auto">
+          <div class="flex justify-between h-[70px] items-center">
+            <div class="text-4xl font-semibold pl-6">
+              <span class="text-red-500">Shop</span
+              ><span class="text-yellow-400">ping</span
+              ><span><span class="text-red-600">C</span>art</span>
+            </div>
+            <!-- Hamburger Icon -->
+            <div class="md:hidden pr-6">
+              <button id="hamburger" class="focus:outline-none">
+                <img
+                  class="h-6 w-6"
+                  src="https://img.icons8.com/material-outlined/24/000000/menu--v1.png"
+                  alt="Menu"
+                />
+              </button>
+            </div>
+            <!-- Menu -->
+            <div class="hidden md:flex pr-6">
+              <ul
+                class="flex justify-between gap-[40px] text-[20px] font-bold text-gray-200"
+              >
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li>
+                  <img
+                    class="h-[27px] w-[27px]"
+                    src="https://img.icons8.com/?size=100&id=42382&format=png&color=FFFFFF"
+                    alt=""
+                  />
+                </li>
+                <li>
+                  <img
+                    class="h-[25px] w-[25px]"
+                    src="https://img.icons8.com/?size=100&id=p8VkXMjDOpcE&format=png&color=000000"
+                    alt=""
+                  />
+                </li>
+              </ul>
+            </div>
+            <!-- Mobile Menu -->
+            <div
+              class="hidden absolute top-[70px] w-full bg-purple-700/40 text-xl text-black font-bold rounded-b-lg shadow-md z-10"
+              id="mobile-menu"
+            >
+              <ul class="flex flex-col items-center py-8">
+                <li class="py-2"><a href="#">Home</a></li>
+                <li class="py-2"><a href="#">Products</a></li>
+                <li class="py-2"><a href="#">Blog</a></li>
+                <li class="py-2"><a href="#">About</a></li>
+                <li class="py-2"><a href="#">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <div class="w-auto h-auto bg-purple-100 rounded-b-xl">
+          <div class="container mx-auto">
+            <div class="grid sm:grid-cols-1 lg:grid-cols-2">
+              <div class="pt-[80px] pl-10">
+                <div class="leading-[60px]">
+                  <h1 class="text-[60px] font-extrabold text-red-600">
+                    Sale 20% Off
+                  </h1>
+                  <h1 class="text-[60px] font-extrabold text-gray-700">
+                    On Everything
+                  </h1>
+                </div>
+
+                <p class="text-black font-sans mt-4">
+                  Explicabo esse amet tempora quibusdam laudantium, laborum
+                  eaque magnam fugiat hic? Esse dicta aliquid error repudiandae
+                  earum suscipit fugiat molestias, veniam, vel architecto
+                  veritatis delectus repellat modi impedit sequi.
+                </p>
+                <button
+                  class="mt-4 text-[20px] bg-red-600 font-semibold rounded-xl px-5 py-1"
+                >
+                  Shop Now
+                </button>
+              </div>
+              <div class="pl-9">
+                <img
+                  class="hidden lg:block"
+                  src="./lovepik-young-mens-product-display-and-promotion-png-image_400247495_wh1200-removebg-preview.png"
+                  alt="Large Screen Image"
+                />
+                <img
+                  class="block lg:hidden"
+                  src="./6364.png_1200-removebg-preview.png"
+                  alt="Small Screen Image"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="py-14">
+          <h1 class="text-center text-[40px] font-semibold text-purple-500">
+            Products
+          </h1>
+          <div class="mt-6">
+            <div class="container mx-auto">
+              <div
+                class="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-[30px] sm:mb-[30px] rounded-b-3xl"
+              >
+                <div
+                  class="border border-purple-600 rounded-md shadow-white overflow-hidden"
+                >
+                  <div class="p-3">
+                    <img
+                      class="w-full h-[250px] object-cover rounded-md"
+                      src="https://wearekingly.com/wp-content/uploads/2021/06/Custom-made-T-Shirts-35.jpg"
+                      alt="Small T-Shirt"
+                    />
+                    <h1
+                      class="font-sans text-2xl font-bold mt-4 text-purple-500"
+                    >
+                      Small T-Shirt
+                    </h1>
+                    <div class="flex gap-1 mt-2">
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=39120&format=png&color=FAB005"
+                        alt=""
+                      />
+                    </div>
+                    <p class="mt-3 text-white font-sans">
+                      Sample text. Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit nullam nunc justo sagittis suscipit.
+                    </p>
+                    <div
+                      class="mt-4 font-sans flex justify-between items-center"
+                    >
+                      <p class="text-lg font-semibold">$18.90</p>
+                      <button
+                        class="font-bold bg-purple-700 text-white rounded-md px-4 py-2"
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="border border-purple-600 rounded-md shadow-white overflow-hidden"
+                >
+                  <div class="p-3">
+                    <img
+                      class="w-full h-[250px] object-cover rounded-md"
+                      src="https://wearekingly.com/wp-content/uploads/2021/06/Custom-made-T-Shirts-35.jpg"
+                      alt="Small T-Shirt"
+                    />
+                    <h1
+                      class="font-sans text-2xl font-bold mt-4 text-purple-500"
+                    >
+                      Small T-Shirt
+                    </h1>
+                    <div class="flex gap-1 mt-2">
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=39120&format=png&color=FAB005"
+                        alt=""
+                      />
+                    </div>
+                    <p class="mt-3 text-white font-sans">
+                      Sample text. Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit nullam nunc justo sagittis suscipit.
+                    </p>
+                    <div
+                      class="mt-4 font-sans flex justify-between items-center"
+                    >
+                      <p class="text-lg font-semibold">$18.90</p>
+                      <button
+                        class="font-bold bg-purple-700 text-white rounded-md px-4 py-2"
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="border border-purple-600 rounded-md shadow-white overflow-hidden"
+                >
+                  <div class="p-3">
+                    <img
+                      class="w-full h-[250px] object-cover rounded-md"
+                      src="https://wearekingly.com/wp-content/uploads/2021/06/Custom-made-T-Shirts-35.jpg"
+                      alt="Small T-Shirt"
+                    />
+                    <h1
+                      class="font-sans text-2xl font-bold mt-4 text-purple-500"
+                    >
+                      Small T-Shirt
+                    </h1>
+                    <div class="flex gap-1 mt-2">
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=39120&format=png&color=FAB005"
+                        alt=""
+                      />
+                    </div>
+                    <p class="mt-3 text-white font-sans">
+                      Sample text. Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit nullam nunc justo sagittis suscipit.
+                    </p>
+                    <div
+                      class="mt-4 font-sans flex justify-between items-center"
+                    >
+                      <p class="text-lg font-semibold">$18.90</p>
+                      <button
+                        class="font-bold bg-purple-700 text-white rounded-md px-4 py-2"
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="border border-purple-600 rounded-md shadow-white overflow-hidden"
+                >
+                  <div class="p-3">
+                    <img
+                      class="w-full h-[250px] object-cover rounded-md"
+                      src="https://wearekingly.com/wp-content/uploads/2021/06/Custom-made-T-Shirts-35.jpg"
+                      alt="Small T-Shirt"
+                    />
+                    <h1
+                      class="font-sans text-2xl font-bold mt-4 text-purple-500"
+                    >
+                      Small T-Shirt
+                    </h1>
+                    <div class="flex gap-1 mt-2">
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=39120&format=png&color=FAB005"
+                        alt=""
+                      />
+                    </div>
+                    <p class="mt-3 text-white font-sans">
+                      Sample text. Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit nullam nunc justo sagittis suscipit.
+                    </p>
+                    <div
+                      class="mt-4 font-sans flex justify-between items-center"
+                    >
+                      <p class="text-lg font-semibold">$18.90</p>
+                      <button
+                        class="font-bold bg-purple-700 text-white rounded-md px-4 py-2"
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="border border-purple-600 rounded-md shadow-white overflow-hidden"
+                >
+                  <div class="p-3">
+                    <img
+                      class="w-full h-[250px] object-cover rounded-md"
+                      src="https://wearekingly.com/wp-content/uploads/2021/06/Custom-made-T-Shirts-35.jpg"
+                      alt="Small T-Shirt"
+                    />
+                    <h1
+                      class="font-sans text-2xl font-bold mt-4 text-purple-500"
+                    >
+                      Small T-Shirt
+                    </h1>
+                    <div class="flex gap-1 mt-2">
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=39120&format=png&color=FAB005"
+                        alt=""
+                      />
+                    </div>
+                    <p class="mt-3 text-white font-sans">
+                      Sample text. Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit nullam nunc justo sagittis suscipit.
+                    </p>
+                    <div
+                      class="mt-4 font-sans flex justify-between items-center"
+                    >
+                      <p class="text-lg font-semibold">$18.90</p>
+                      <button
+                        class="font-bold bg-purple-700 text-white rounded-md px-4 py-2"
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="border border-purple-600 rounded-md shadow-white overflow-hidden"
+                >
+                  <div class="p-3">
+                    <img
+                      class="w-full h-[250px] object-cover rounded-md"
+                      src="https://wearekingly.com/wp-content/uploads/2021/06/Custom-made-T-Shirts-35.jpg"
+                      alt="Small T-Shirt"
+                    />
+                    <h1
+                      class="font-sans text-2xl font-bold mt-4 text-purple-500"
+                    >
+                      Small T-Shirt
+                    </h1>
+                    <div class="flex gap-1 mt-2">
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=39120&format=png&color=FAB005"
+                        alt=""
+                      />
+                    </div>
+                    <p class="mt-3 text-white font-sans">
+                      Sample text. Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit nullam nunc justo sagittis suscipit.
+                    </p>
+                    <div
+                      class="mt-4 font-sans flex justify-between items-center"
+                    >
+                      <p class="text-lg font-semibold">$18.90</p>
+                      <button
+                        class="font-bold bg-purple-700 text-white rounded-md px-4 py-2"
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="border border-purple-600 rounded-md shadow-white overflow-hidden"
+                >
+                  <div class="p-3">
+                    <img
+                      class="w-full h-[250px] object-cover rounded-md"
+                      src="https://wearekingly.com/wp-content/uploads/2021/06/Custom-made-T-Shirts-35.jpg"
+                      alt="Small T-Shirt"
+                    />
+                    <h1
+                      class="font-sans text-2xl font-bold mt-4 text-purple-500"
+                    >
+                      Small T-Shirt
+                    </h1>
+                    <div class="flex gap-1 mt-2">
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=37974&format=png&color=FAB005"
+                        alt=""
+                      />
+                      <img
+                        class="h-[17px] w-[17px]"
+                        src="https://img.icons8.com/?size=100&id=39120&format=png&color=FAB005"
+                        alt=""
+                      />
+                    </div>
+                    <p class="mt-3 text-white font-sans">
+                      Sample text. Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit nullam nunc justo sagittis suscipit.
+                    </p>
+                    <div
+                      class="mt-4 font-sans flex justify-between items-center"
+                    >
+                      <p class="text-lg font-semibold">$18.90</p>
+                      <button
+                        class="font-bold bg-purple-700 text-white rounded-md px-4 py-2"
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="mt-6">
+          <div class="w-[500px] h-auto bg-purple-600">
+            <div class="">
+              <div class="w-auto h-[60px]">
+                <div class="flex justify-between">
+                  <img
+                    src="https://wearekingly.com/wp-content/uploads/2021/06/Custom-made-T-Shirts-35.jpg"
+                    alt=""
+                  />
+                </div>
+                <div>
+                  <h1>Small T-Shirt</h1>
+                  <p class="mt-3 text-white font-sans">
+                    Sample text. Lorem ipsum dolor sit amet, consectetur
+                    adipiscing elit nullam nunc justo sagittis suscipit.
+                  </p>
+                  <div class="flex justify-between">
+                    <div>count</div>
+                    <div>
+                      <p class="text-lg font-semibold">$18.90</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- <footer class="bg-black py-14">
+      <div class="container px-5 mx-auto text-white md:px-0">
+        
+        <div class="flex items-center justify-center">
+          <h1
+            class="text-center text-white font-semibold text-[35px] h-full w-[600px]"
+          >
+            Work easy <br />
+            Grow further with Shopping Cart
+          </h1>
+        </div>
+        <div class="flex items-center">
+          <button
+            type="button"
+            class="flex items-center px-8 py-4 mx-auto my-10 text-black bg-white rounded-full md:my-16 btn_flex md:px-12"
+          >
+            Request a demo
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="3"
+              stroke="currentColor"
+              class="w-4 h-4 ml-2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m8.25 4.5 7.5 7.5-7.5 7.5"
+              ></path>
+            </svg>
+          </button>
+        </div>
+        <hr class="divider" />
+        
+        <div class="flex flex-col gap-10 py-10 md:py-16 md:flex-row">
+          <div class="flex-1">
+            <h2 class="mb-8 text-3xl font-semibold">Shopping Cart</h2>
+            <div class="flex gap-3">
+              <div class="p-2 bg-gray-700 rounded-full">
+                <a href="#">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    x="0px"
+                    y="0px"
+                    class="fill-current stroke-current size-6"
+                    viewBox="0 0 50 50"
+                  >
+                    <path
+                      d="M 5.9199219 6 L 20.582031 27.375 L 6.2304688 44 L 9.4101562 44 L 21.986328 29.421875 L 31.986328 44 L 44 44 L 28.681641 21.669922 L 42.199219 6 L 39.029297 6 L 27.275391 19.617188 L 17.933594 6 L 5.9199219 6 z M 9.7167969 8 L 16.880859 8 L 40.203125 42 L 33.039062 42 L 9.7167969 8 z"
+                    ></path>
+                  </svg>
+                </a>
+              </div>
+              <div class="p-2 bg-gray-700 rounded-full">
+                <a href="https://www.linkedin.com/in/web3-hasan/">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    x="0px"
+                    y="0px"
+                    class="fill-current stroke-current size-6"
+                    viewBox="0 0 50 50"
+                  >
+                    <path
+                      d="M 8 3.0117188 C 6.3126093 3.0117188 4.8354789 3.4916328 3.7539062 4.3652344 C 2.6723337 5.238836 2.0117188 6.533218 2.0117188 7.9472656 C 2.0117188 10.690836 4.4687078 12.814467 7.7167969 12.941406 A 0.98809878 0.98809878 0 0 0 8 12.988281 C 9.753566 12.988281 11.246191 12.474267 12.3125 11.564453 C 13.378809 10.654639 13.988281 9.3429353 13.988281 7.9472656 A 0.98809878 0.98809878 0 0 0 13.986328 7.8925781 C 13.832307 5.1316834 11.374781 3.0117187 8 3.0117188 z M 8 4.9882812 C 10.60907 4.9882812 11.895883 6.2693448 12.005859 7.9726562 C 11.998759 8.8049335 11.676559 9.5118991 11.03125 10.0625 C 10.378809 10.619186 9.371434 11.011719 8 11.011719 C 5.3980542 11.011719 3.9882813 9.5991704 3.9882812 7.9472656 C 3.9882812 7.1213132 4.3276663 6.4422421 4.9960938 5.9023438 C 5.6645211 5.3624454 6.6873907 4.9882813 8 4.9882812 z M 3 15 A 1.0001 1.0001 0 0 0 2 16 L 2 45 A 1.0001 1.0001 0 0 0 3 46 L 13 46 A 1.0001 1.0001 0 0 0 14 45 L 14 35.664062 L 14 16 A 1.0001 1.0001 0 0 0 13 15 L 3 15 z M 18 15 A 1.0001 1.0001 0 0 0 17 16 L 17 45 A 1.0001 1.0001 0 0 0 18 46 L 28 46 A 1.0001 1.0001 0 0 0 29 45 L 29 29 L 29 28.75 L 29 28.5 C 29 26.555577 30.555577 25 32.5 25 C 34.444423 25 36 26.555577 36 28.5 L 36 45 A 1.0001 1.0001 0 0 0 37 46 L 47 46 A 1.0001 1.0001 0 0 0 48 45 L 48 28 C 48 23.873476 46.787888 20.604454 44.744141 18.375 C 42.700394 16.145546 39.849212 15 36.787109 15 C 32.882872 15 30.521631 16.426076 29 17.601562 L 29 16 A 1.0001 1.0001 0 0 0 28 15 L 18 15 z M 4 17 L 12 17 L 12 35.664062 L 12 44 L 4 44 L 4 17 z M 19 17 L 27 17 L 27 19.638672 A 1.0001 1.0001 0 0 0 28.744141 20.306641 C 28.744141 20.306641 31.709841 17 36.787109 17 C 39.360007 17 41.615528 17.922268 43.269531 19.726562 C 44.923534 21.530858 46 24.261524 46 28 L 46 44 L 38 44 L 38 28.5 A 1.0001 1.0001 0 0 0 37.916016 28.089844 C 37.694061 25.26411 35.38033 23 32.5 23 C 29.474423 23 27 25.474423 27 28.5 L 27 28.75 L 27 29 L 27 44 L 19 44 L 19 17 z"
+                    ></path>
+                  </svg>
+                </a>
+              </div>
+              <div class="p-2 bg-gray-700 rounded-full">
+                <a href="https://www.facebook.com/gh.gimhaa">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    x="0px"
+                    y="0px"
+                    class="fill-current stroke-current size-6"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M16.403,9H14V7c0-1.032,0.084-1.682,1.563-1.682h0.868c0.552,0,1-0.448,1-1V3.064c0-0.523-0.401-0.97-0.923-1.005 C15.904,2.018,15.299,1.999,14.693,2C11.98,2,10,3.657,10,6.699V9H8c-0.552,0-1,0.448-1,1v2c0,0.552,0.448,1,1,1l2-0.001V21 c0,0.552,0.448,1,1,1h2c0.552,0,1-0.448,1-1v-8.003l2.174-0.001c0.508,0,0.935-0.381,0.993-0.886l0.229-1.996 C17.465,9.521,17.001,9,16.403,9z"
+                    ></path>
+                  </svg>
+                </a>
+              </div>
+              <div class="p-2 bg-gray-700 rounded-full">
+                <a href="https://www.instagram.com/hasan_kk420/?hl=en">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    x="0px"
+                    y="0px"
+                    class="fill-current stroke-current size-6"
+                    viewBox="0 0 50 50"
+                  >
+                    <path
+                      d="M 16 3 C 8.8324839 3 3 8.8324839 3 16 L 3 34 C 3 41.167516 8.8324839 47 16 47 L 34 47 C 41.167516 47 47 41.167516 47 34 L 47 16 C 47 8.8324839 41.167516 3 34 3 L 16 3 z M 16 5 L 34 5 C 40.086484 5 45 9.9135161 45 16 L 45 34 C 45 40.086484 40.086484 45 34 45 L 16 45 C 9.9135161 45 5 40.086484 5 34 L 5 16 C 5 9.9135161 9.9135161 5 16 5 z M 37 11 A 2 2 0 0 0 35 13 A 2 2 0 0 0 37 15 A 2 2 0 0 0 39 13 A 2 2 0 0 0 37 11 z M 25 14 C 18.936712 14 14 18.936712 14 25 C 14 31.063288 18.936712 36 25 36 C 31.063288 36 36 31.063288 36 25 C 36 18.936712 31.063288 14 25 14 z M 25 16 C 29.982407 16 34 20.017593 34 25 C 34 29.982407 29.982407 34 25 34 C 20.017593 34 16 29.982407 16 25 C 16 20.017593 20.017593 16 25 16 z"
+                    ></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="flex-1">
+            <h2 class="footer_heading">How it works</h2>
+            <ul class="space-y-3 text-sm">
+              <li><a href="#">Hire Employees</a></li>
+              <li><a href="#">Hire Contractors</a></li>
+              <li><a href="#">Run Global Payroll</a></li>
+              <li><a href="#">App Store</a></li>
+              <li><a href="#">Open API</a></li>
+            </ul>
+          </div>
+          <div class="flex-1">
+            <h2 class="footer_heading">Solutions</h2>
+            <ul class="space-y-3 text-sm">
+              <li><a href="#">Compliance</a></li>
+              <li><a href="#">Payments</a></li>
+              <li><a href="#">For Finance Teams</a></li>
+              <li><a href="#">For Legal Teams</a></li>
+              <li><a href="#">For Hiring Managers</a></li>
+              <li><a href="#">Startup</a></li>
+              <li><a href="#">Enterprise</a></li>
+            </ul>
+          </div>
+          <div class="flex-1">
+            <h2 class="footer_heading">Resources</h2>
+            <ul class="space-y-3 text-sm">
+              <li><a href="#">About</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Support hub</a></li>
+              <li><a href="#">Global Hiring Guide</a></li>
+              <li><a href="#">Partner Program</a></li>
+              <li><a href="#">Affiliates</a></li>
+              <li><a href="#">Case Studies</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Glossary</a></li>
+              <li><a href="#">Press</a></li>
+              <li><a href="#">Service Status</a></li>
+              <li><a href="#">Worker Community</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 pb-5 md:pb-10">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"
+            ></path>
+          </svg>
+          <p>English</p>
+        </div>
+        <hr class="divider" />
+       
+        <div class="lg:flex justify-between">
+          <p class="mb-5 md:mb-0">© Copyright 2024. H A S A N</p>
+          <ul class="lg:flex gap-6 text-gray-400">
+            <li class="sm:mt-4">
+              <a href="#">Privacy Policy</a>
+            </li>
+            <li class="sm:mt-4">
+              <a href="#">Terms of Service</a>
+            </li>
+            <li class="sm:mt-4">
+              <a href="#">Whistleblower Policy</a>
+            </li>
+            <li class="sm:mt-4">
+              <a href="#">Cookie policy</a>
+            </li>
+            <li class="sm:mt-4">
+              <a href="#">Cookie Settings</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer> -->
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const hamburger = document.getElementById("hamburger");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        hamburger.addEventListener("click", () => {
+          mobileMenu.classList.toggle("hidden");
+        });
+
+        // Close the mobile menu when clicking outside
+        document.addEventListener("click", function (event) {
+          if (
+            !hamburger.contains(event.target) &&
+            !mobileMenu.contains(event.target)
+          ) {
+            mobileMenu.classList.add("hidden");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
