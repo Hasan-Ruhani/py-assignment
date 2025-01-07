@@ -176,6 +176,7 @@ function updateCartUI() {
 
   // Update total price and item count display
   document.querySelector(".summary-items-count").textContent = `${totalItems}`;
+  document.querySelector(".summary-items-count1").textContent = `${totalItems}`;
   document.querySelector(
     ".summary-total-price"
   ).textContent = `$${total.toFixed(2)}`;
