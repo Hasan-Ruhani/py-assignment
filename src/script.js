@@ -183,18 +183,16 @@ function updateCartUI() {
 
 document.addEventListener("DOMContentLoaded", function () {
   const cartContainer = document.getElementById("shopping-cart");
-  const backToShopButton = document.querySelector(".back-to-shop"); // Ensure this button is not dynamically added
+  const cartIcon = document.querySelector(".cart-icon"); // Target the cart icon
+  const backToShopButton = document.querySelector(".back-to-shop"); // Target the "Back to Shop" button
 
-  // Using event delegation to handle cart icon clicks
-  document.body.addEventListener("click", function (event) {
-    // Check if the clicked element or its parent has the 'cart-icon' class
-    if (event.target.closest(".cart-icon")) {
-      cartContainer.classList.toggle("visible");
-    }
+  // Toggle the cart's visibility when the cart icon is clicked
+  cartIcon.addEventListener("click", function () {
+    cartContainer.classList.toggle("visible");
+  });
 
-    // Close the cart when the "Back to Shop" button is clicked
-    if (event.target === backToShopButton) {
-      cartContainer.classList.remove("visible");
-    }
+  // Close the cart when the "Back to Shop" button is clicked
+  backToShopButton.addEventListener("click", function () {
+    cartContainer.classList.remove("visible");
   });
 });
