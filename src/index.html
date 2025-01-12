@@ -170,34 +170,48 @@
 
       <section>
         <div class="cart-container" id="shopping-cart">
-          <div
-            class="w-[750px] h-auto bg-purple-600/30 rounded-lg p-4 font-sans"
-          >
+          <div class="w-[750px] h-auto bg-purple-600/30 rounded-lg p-4 font-sans">
             <h1 class="text-3xl font-bold text-gray-500 mb-4">Shopping Cart</h1>
             <div class="flex gap-[5px]">
               <div class="bg-purple-300 order-2 h-[450px] w-[450px] rounded-lg">
-                <div class="p-6 text-black">
-                  <h1 class="text-2xl font-bold mb-4">Summary</h1>
-                  <div class="bg-purple-400 w-full h-0.5 mb-6 mt-6"></div>
+                <div class="p-2 text-black">
+                  <h1 class="text-2xl font-bold">Summary</h1>
+                  <div class="bg-purple-400 w-full h-0.5 mb-2 mt-2"></div>
                   <div class="flex justify-between">
                     <h1 class="font-bold">ITEMS:</h1>
                     <h1 class="font-bold summary-items-count1">0</h1>
                   </div>
-                  <div class="bg-purple-400 w-full h-0.5 mb-6 mt-6"></div>
+                  <div class="bg-purple-400 w-full h-0.5 mb-2 mt-2"></div>
                   <div class="flex justify-between">
                     <h1 class="font-bold">Shipping:</h1>
                     <h1 class="font-bold">Standard Delivery</h1>
                   </div>
-                  <div class="bg-purple-400 w-full h-0.5 mb-6 mt-6"></div>
-                  <div class="flex justify-between items-center">
-                    <h1 class="font-bold">Promo Code:</h1>
-                    <input
-                      class="rounded-sm w-[120px] p-1"
-                      type="text"
-                      placeholder="Code"
-                    />
+                  <div class="bg-purple-400 w-full h-0.5 mb-2 mt-2"></div>
+                  <div class="flex justify-between">
+                    <h1 class="font-bold">Subtotal:</h1>
+                    <h1 class="font-bold summary-subtotal">$0.00</h1>
                   </div>
-                  <div class="bg-purple-400 w-full h-0.5 mb-6 mt-6"></div>
+                  <div class="bg-purple-400 w-full h-0.5 mb-2 mt-2"></div>
+                  <div class="items-center">
+                    <h1 class="font-bold">Promo Code:</h1>
+                    <div class="flex justify-between">
+                      <input
+                        class="rounded-lg w-[120px] p-1"
+                        type="text"
+                        placeholder="Code"
+                      />
+                      <button class="bg-blue-700 rounded-lg px-3 py-2 hover:bg-blue-800 text-center text-white">
+                        Apply
+                      </button>
+                    </div>
+                    <p id="promoMessage" class="mt-2"></p> <!-- Added ID here -->
+                    <div class="bg-purple-400 w-full h-0.5 mb-2 mt-2"></div>
+                    <div class="flex justify-between">
+                      <h1 class="font-bold">Discount Amount:</h1>
+                      <h1 class="font-bold summary-discount-amount">$0.00</h1>
+                    </div>
+                  </div>
+                  <div class="bg-purple-400 w-full h-0.5 mb-3 mt-3"></div>
                   <div class="flex justify-between">
                     <h1 class="font-bold">Total Price:</h1>
                     <h1 class="font-bold summary-total-price">$0.00</h1>

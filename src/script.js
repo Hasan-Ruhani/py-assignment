@@ -112,6 +112,71 @@ window.clearCart = function () {
   updateCartUI();
 };
 
+let appliedPromoCode = null; // To track the applied promo code
+
+document.querySelector(".bg-blue-700").addEventListener("click", applyPromoCode); // Add event listener to the Apply button
+
+function applyPromoCode() {
+  const promoCodeInput = document.querySelector("input[type='text']");
+  const promoCode = promoCodeInput.value.trim();
+  const subtotalElement = document.querySelector(".summary-subtotal");
+  const discountElement = document.querySelector(".summary-discount-amount");
+  const totalPriceElement = document.querySelector(".summary-total-price");
+
+  // Define available promo codes and their discount percentages
+  const promoCodes = {
+    ostad10: 0.1, // 10% discount
+    ostad5: 0.05, // 5% discount
+  };
+
+  // Clear any previous messages
+  const promoMessage = document.getElementById("promoMessage");
+  promoMessage.textContent = '';
+  promoMessage.className = 'mt-2'; // Reset margin class
+
+  // Remove previous error message
+  const previousError = document.querySelector(".text-red-500");
+  if (previousError) previousError.remove();
+
+  // If the promo code is invalid
+  if (!promoCodes[promoCode]) {
+    // Show error message if the promo code is invalid
+    promoMessage.classList.add("text-red-800", "text-sm");
+    promoMessage.textContent = "Invalid promo code. Please try again.";
+
+    // Clear the discount only (keep the total price intact)
+    discountElement.textContent = "$0.00"; // Clear the discount
+    appliedPromoCode = null; // Reset applied promo code
+    return;
+  }
+
+  // Prevent multiple uses of the same promo code
+  if (appliedPromoCode === promoCode) {
+    // Show error message if the promo code is already applied
+    promoMessage.classList.add("text-red-800", "text-sm");
+    promoMessage.textContent = "Promo code already applied.";
+    return;
+  }
+
+  // Calculate the discount
+  const subtotal = parseFloat(subtotalElement.textContent.replace("$", ""));
+  const discount = subtotal * promoCodes[promoCode];
+  const discountedTotal = subtotal - discount;
+
+  // Update the discount and total price
+  discountElement.textContent = `$${discount.toFixed(2)}`; // Display the discount amount
+  totalPriceElement.textContent = `$${discountedTotal.toFixed(2)}`; // Update the total price
+
+  // Show success message
+  promoMessage.classList.add("text-green-800", "text-sm");
+  promoMessage.textContent = `Promo code applied! You saved $${discount.toFixed(2)}.`;
+
+  // Set the applied promo code
+  appliedPromoCode = promoCode;
+}
+
+
+
 function updateCartUI() {
   const cartItemsContainer = document.getElementById("cart-items");
   cartItemsContainer.innerHTML = ""; // Clear the container first
@@ -155,8 +220,8 @@ function updateCartUI() {
                       <h1 class="mx-4 text-black text-xl">${item.quantity}</h1>
                       <button
                           onclick="window.addToCart(${id}, '${item.name}', ${
-      item.price
-    }, '${item.thumbnail}', '${item.description}')"
+                        item.price
+                      }, '${item.thumbnail}', '${item.description}')"
                           class="bg-gray-400/50 text-black font-bold px-4 text-xl rounded-lg hover:bg-gray-400 focus:outline-none flex items-center justify-center"
                       >
                           +
@@ -177,10 +242,24 @@ function updateCartUI() {
   // Update total price and item count display
   document.querySelector(".summary-items-count").textContent = `${totalItems}`;
   document.querySelector(".summary-items-count1").textContent = `${totalItems}`;
-  document.querySelector(
-    ".summary-total-price"
-  ).textContent = `$${total.toFixed(2)}`;
+
+  // Check if a promo code is applied and adjust the total
+  let discount = 0;
+  if (appliedPromoCode) {
+    const promoCodes = {
+      ostad10: 0.1,
+      ostad5: 0.05,
+    };
+    discount = total * promoCodes[appliedPromoCode];
+  }
+
+  const discountedTotal = total - discount;
+
+  document.querySelector(".summary-subtotal").textContent = `$${total.toFixed(2)}`;
+  document.querySelector(".summary-discount-amount").textContent = `$${discount.toFixed(2)}`;
+  document.querySelector(".summary-total-price").textContent = `$${discountedTotal.toFixed(2)}`;
 }
+
 
 document.addEventListener("DOMContentLoaded", function () {
   const cartContainer = document.getElementById("shopping-cart");
