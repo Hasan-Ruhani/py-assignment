@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Student
 
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'phone', 'course', 'user', 'created_at')  # Display in admin panel
+    list_display = ('user', 'name', 'email', 'phone', 'course', 'description', 'photo', 'created_at')  # Display in admin panel
     search_fields = ('name', 'email')  # Search functionality
     list_filter = ('course',)  # Filter option
     ordering = ('name',)  # Order the results

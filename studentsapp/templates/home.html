@@ -7,95 +7,27 @@
             <h1 class="text-center text-[35px] font-bold">Students List</h1>
 
             <div class="mt-6 grid grid-cols-4 gap-[30px] w-full">
-                <div class="h-[360px] border border-purple-500 rounded-xl p-3">
-                    <div class="relative rounded-xl overflow-hidden">
-                        <img class="w-full h-[200px] object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOeZjZWEr4oFmJhILQQgTy7-WUX9BmRrAAFw&s" alt="">
-                        <a href="#" class="absolute bg-white p-1 px-3 rounded-xl hover:text-gray-700 bottom-2 left-2 font-semibold text-xl">MD. HASAN KHAN</a>
-                    </div>
-                    <div class="mt-1 ml-1">
-                        <h1 class="font-bold">Email: <span class="font-semibold">hasan@gmail.com</span></h1>
-                        <h1 class="font-bold">Phone: <span class="font-semibold">01799691266</span></h1>
-                        <h1 class="font-bold">Course: <span class="font-semibold">Electrical</span></h1>
-                        <div class="mt-2 font-semibold text-gray-800 hover:text-green-900">
-                            <a href="#">Lorem ipsum dolor, sit amet consectetur adipisicing elit...</a>
-                        </div>
-                    </div>
-                </div>
+                {% for student in students %}
+                    <div class="h-[360px] border border-purple-500 rounded-xl p-3">
+                        <div class="relative rounded-xl overflow-hidden">
+                            {% if student.photo %}
+                                <img class="w-full h-[200px] object-cover" src="{{ student.photo.url }}" alt="">
+                            {% else %}
+                                <img class="w-full h-[200px] object-cover" src="https://img.freepik.com/free-psd/contact-icon-illustration-isolated_23-2151903337.jpg" alt="">
+                            {% endif %}
 
-                <div class="border border-purple-500 rounded-xl p-3">
-                    <div class="relative rounded-xl overflow-hidden">
-                        <img class="w-full h-[200px] object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOeZjZWEr4oFmJhILQQgTy7-WUX9BmRrAAFw&s" alt="">
-                        <a href="#" class="absolute bg-white p-1 px-3 rounded-xl hover:text-gray-700 bottom-2 left-2 font-semibold text-xl">MD. HASAN KHAN</a>
-                    </div>
-                    <div class="mt-1 ml-1">
-                        <h1 class="font-bold">Email: <span class="font-semibold">hasan@gmail.com</span></h1>
-                        <h1 class="font-bold">Phone: <span class="font-semibold">01799691266</span></h1>
-                        <h1 class="font-bold">Course: <span class="font-semibold">Electrical</span></h1>
-                        <div class="mt-2 font-semibold text-gray-800 hover:text-green-900">
-                            <a href="#">Lorem ipsum dolor, sit amet consectetur adipisicing elit...</a>
+                            <a href="{% url 'details' student.pk %}" class="absolute bg-white p-1 px-3 rounded-xl hover:text-gray-700 bottom-2 left-2 font-semibold text-xl">{{ student.name | capfirst }}</a>
+                        </div>
+                        <div class="mt-1 ml-1">
+                            <h1 class="font-bold">Email: <span class="font-semibold">{{ student.email }}</span></h1>
+                            <h1 class="font-bold">Phone: <span class="font-semibold">{{ student.phone }}</span></h1>
+                            <h1 class="font-bold">Course: <span class="font-semibold">{{ student.course }}</span></h1>
+                            <div class="mt-2 font-semibold text-gray-800 hover:text-green-900">
+                                <a href="{% url 'details' student.pk %}">{{ student.description|truncatechars:55 }}</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="border border-purple-500 rounded-xl p-3">
-                    <div class="relative rounded-xl overflow-hidden">
-                        <img class="w-full h-[200px] object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOeZjZWEr4oFmJhILQQgTy7-WUX9BmRrAAFw&s" alt="">
-                        <a href="#" class="absolute bg-white p-1 px-3 rounded-xl hover:text-gray-700 bottom-2 left-2 font-semibold text-xl">MD. HASAN KHAN</a>
-                    </div>
-                    <div class="mt-1 ml-1">
-                        <h1 class="font-bold">Email: <span class="font-semibold">hasan@gmail.com</span></h1>
-                        <h1 class="font-bold">Phone: <span class="font-semibold">01799691266</span></h1>
-                        <h1 class="font-bold">Course: <span class="font-semibold">Electrical</span></h1>
-                        <div class="mt-2 font-semibold text-gray-800 hover:text-green-900">
-                            <a href="#">Lorem ipsum dolor, sit amet consectetur adipisicing elit...</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="border border-purple-500 rounded-xl p-3">
-                    <div class="relative rounded-xl overflow-hidden">
-                        <img class="w-full h-[200px] object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOeZjZWEr4oFmJhILQQgTy7-WUX9BmRrAAFw&s" alt="">
-                        <a href="#" class="absolute bg-white p-1 px-3 rounded-xl hover:text-gray-700 bottom-2 left-2 font-semibold text-xl">MD. HASAN KHAN</a>
-                    </div>
-                    <div class="mt-1 ml-1">
-                        <h1 class="font-bold">Email: <span class="font-semibold">hasan@gmail.com</span></h1>
-                        <h1 class="font-bold">Phone: <span class="font-semibold">01799691266</span></h1>
-                        <h1 class="font-bold">Course: <span class="font-semibold">Electrical</span></h1>
-                        <div class="mt-2 font-semibold text-gray-800 hover:text-green-900">
-                            <a href="#">Lorem ipsum dolor, sit amet consectetur adipisicing elit...</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="border border-purple-500 rounded-xl p-3">
-                    <div class="relative rounded-xl overflow-hidden">
-                        <img class="w-full h-[200px] object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOeZjZWEr4oFmJhILQQgTy7-WUX9BmRrAAFw&s" alt="">
-                        <a href="#" class="absolute bg-white p-1 px-3 rounded-xl hover:text-gray-700 bottom-2 left-2 font-semibold text-xl">MD. HASAN KHAN</a>
-                    </div>
-                    <div class="mt-1 ml-1">
-                        <h1 class="font-bold">Email: <span class="font-semibold">hasan@gmail.com</span></h1>
-                        <h1 class="font-bold">Phone: <span class="font-semibold">01799691266</span></h1>
-                        <h1 class="font-bold">Course: <span class="font-semibold">Electrical</span></h1>
-                        <div class="mt-2 font-semibold text-gray-800 hover:text-green-900">
-                            <a href="#">Lorem ipsum dolor, sit amet consectetur adipisicing elit...</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="border border-purple-500 rounded-xl p-3">
-                    <div class="relative rounded-xl overflow-hidden">
-                        <img class="w-full h-[200px] object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOeZjZWEr4oFmJhILQQgTy7-WUX9BmRrAAFw&s" alt="">
-                        <a href="#" class="absolute bg-white p-1 px-3 rounded-xl hover:text-gray-700 bottom-2 left-2 font-semibold text-xl">MD. HASAN KHAN</a>
-                    </div>
-                    <div class="mt-1 ml-1">
-                        <h1 class="font-bold">Email: <span class="font-semibold">hasan@gmail.com</span></h1>
-                        <h1 class="font-bold">Phone: <span class="font-semibold">01799691266</span></h1>
-                        <h1 class="font-bold">Course: <span class="font-semibold">Electrical</span></h1>
-                        <div class="mt-2 font-semibold text-gray-800 hover:text-green-900">
-                            <a href="#">Lorem ipsum dolor, sit amet consectetur adipisicing elit...</a>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>

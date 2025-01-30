@@ -10,18 +10,44 @@
     <header>
       <div class="bg-purple-200 w-full rounded-b-3 shadow-lg">
         <div class="container mx-auto h-[60px] flex justify-between items-center">
-            <div class="text-xl font-bold flex hover:bg-red-800/3 rounded-lg py-2 px-2 cursor-pointer">Student <span class="text-red-600">App</span></div>
+            <a href="{% url 'home' %}" class="text-xl font-bold flex hover:bg-red-800/3 rounded-lg py-2 px-2 cursor-pointer">Student <span class="text-red-600">App</span></a>
             <div>
               <ul class="flex justify-between gap-[20px] text-md font-semibold text-red-800 cursor-pointer">
-                <li class="hover:text-red-700 hover:bg-red-800/6 py-2 px-2 rounded-lg">Students</li>
-                <li class="hover:text-red-700 hover:bg-red-800/6 py-2 px-2 rounded-lg">Create Student</li>
-                <li class="hover:text-red-700 hover:bg-red-800/6 py-2 px-2 rounded-lg">About Us</li>
-                <li class="hover:text-red-700 hover:bg-red-800/6 py-2 px-2 rounded-lg">Contact Us</li>
+                <a href="{% url 'home' %}" class="hover:text-red-700 hover:bg-red-800/6 py-2 px-2 rounded-lg">Students</a>
+                <a href="{% url 'create' %}" class="hover:text-red-700 hover:bg-red-800/6 py-2 px-2 rounded-lg">Create Student</a>
+                {% if user.is_authenticated %}
+                  <a href="{% url 'own' %}" class="hover:text-red-700 hover:bg-red-800/6 py-2 px-2 rounded-lg">Owned Students</a>
+                {% endif %}
+                <a href="#" class="hover:text-red-700 hover:bg-red-800/6 py-2 px-2 rounded-lg">About Us</a>
+                <a href="#" class="hover:text-red-700 hover:bg-red-800/6 py-2 px-2 rounded-lg">Contact Us</a>
               </ul>
             </div>
-            <div class="hover:bg-red-800/8 rounded-lg py-2 px-3">
-              <div class="bg-purple-400 rounded py-2 px-2 font-semibold cursor-pointer">Sign Up</div>
-            </div>
+            <div class="relative inline-block text-left">
+              {% if user.is_authenticated %}
+                  <!-- Username Button -->
+                  <button onclick="toggleDropdown()" class="hover:bg-purple-500 rounded-lg py-2 px-3 cursor-pointer bg-purple-400 rounded py-2 px-2 font-semibold">
+                      {{ user.username | capfirst }}
+                  </button>
+          
+                  <!-- Dropdown Menu -->
+                  <div id="dropdown-menu" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg hidden">
+                    <form method="post" action="{% url 'user_logout' %}">
+                      {% csrf_token %}
+                      <button type="submit" class="cursor-pointer block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left">
+                          Logout
+                      </button>
+                   </form>
+                  </div>
+              {% else %}
+                  <!-- Sign In Button -->
+                  <div class="hover:bg-red-800/8 rounded-lg py-4 px-3">
+                      <a href="{% url 'userLogin' %}" class="bg-purple-400 rounded py-2 px-2 font-semibold cursor-pointer">
+                          Sign In
+                      </a>
+                  </div>
+              {% endif %}
+          </div>
+          
         </div>
       </div>
     </header>
@@ -39,6 +65,27 @@
       
       {% endblock content %}
     </div>
+
+    <script>
+      function toggleDropdown() {
+          let menu = document.getElementById("dropdown-menu");
+          if (menu.classList.contains("hidden")) {
+              menu.classList.remove("hidden");
+          } else {
+              menu.classList.add("hidden");
+          }
+      }
+      
+      document.addEventListener("click", function(event) {
+          let menu = document.getElementById("dropdown-menu");
+          let button = document.querySelector("button");
+      
+          if (!menu.contains(event.target) && !button.contains(event.target)) {
+              menu.classList.add("hidden");
+          }
+      });
+      </script>
+      
 
     <footer>
       <div class="items-center flex justify-center gap-2 w-full h-[80px] bg-gray-700 text-white">
