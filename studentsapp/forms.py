@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 import re
 from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 
 class StudentForm(forms.ModelForm):
     class Meta:
@@ -11,9 +12,16 @@ class StudentForm(forms.ModelForm):
         exclude = ['user']
 
     def clean_email(self):
-        """Ensure email is unique (ignoring current student)"""
+        """Ensure email is unique (ignoring current student) and is a valid email address."""
         email = self.cleaned_data.get('email')
 
+        # Validate email format
+        try:
+            validate_email(email)
+        except ValidationError:
+            raise ValidationError("Enter a valid email address.")
+
+        # Check uniqueness
         if models.Student.objects.filter(email=email).exclude(pk=self.instance.pk).exists():
             raise ValidationError("This email already exists!")
 
