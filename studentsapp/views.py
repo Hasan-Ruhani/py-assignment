@@ -9,13 +9,7 @@ from . import forms
 from . import models
 from .forms import SignUpForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-
-
-def userLogin(request):
-    return render(request, 'login.html')  
-
-def create(request):
-    return render(request, 'create_update.html')  
+from django.core.exceptions import PermissionDenied
 
 class studentList(ListView):
     model = models.Student
@@ -52,6 +46,54 @@ class studentCreate(LoginRequiredMixin, CreateView):
         student.save()
         messages.add_message(self.request, messages.SUCCESS, 'Student create successfully.')
         return super().form_valid(form)
+    
+from django.core.exceptions import PermissionDenied
+
+class studentUpdate(LoginRequiredMixin, UpdateView):
+    """Update student details - Only allow the owner to edit"""
+    model = models.Student
+    form_class = forms.StudentForm
+    template_name = 'create_update.html'
+    success_url = reverse_lazy('own')
+
+    def get_object(self, queryset=None):
+        """Ensure only the student owner can edit"""
+        obj = super().get_object(queryset)
+        
+        if obj.user != self.request.user:  # Check if the logged-in user is the owner
+            raise PermissionDenied("You are not allowed to edit this student!")  # Restrict access
+        
+        return obj
+
+    def form_valid(self, form):
+        """Show success message on successful update"""
+        messages.success(self.request, "Student updated successfully!")
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        """Show error messages on form errors"""
+        messages.error(self.request, "❌ Something went wrong! Please check the form.")
+        return self.render_to_response(self.get_context_data(form=form))
+    
+
+class studentDelete(LoginRequiredMixin, DeleteView):
+    """Allow only the owner to delete their students"""
+    model = models.Student
+    template_name = 'create_update.html'
+    success_url = reverse_lazy('own')
+
+    def get_object(self, queryset=None):
+        """Ensure only the student owner can delete"""
+        obj = super().get_object(queryset)
+        if obj.user != self.request.user:
+            raise PermissionDenied("You are not allowed to delete this student!")
+        return obj
+
+    def delete(self, request, *args, **kwargs):
+        """Show success message on successful delete"""
+        messages.success(self.request, "Student deleted successfully!")
+        return super().delete(request, *args, **kwargs)
+
 
 class signup(CreateView):
     model = User

@@ -5,19 +5,23 @@ from django.core.exceptions import ValidationError
 from django.conf import settings
 
 def student_directory_name(instance, filename):
-    """Save image inside the media folder within the app with student name"""
+    """Save image inside the current Django app's media folder with student name"""
+    
+    # Get the app name dynamically (assuming the app is inside BASE_DIR)
+    app_name = os.path.basename(os.path.dirname(os.path.abspath(__file__)))  # Get the current app name
 
-    # Ensure MEDIA_ROOT is used as the base directory
-    base_media_path = settings.MEDIA_ROOT  # This ensures all files are stored within MEDIA_ROOT
+    # Define app-specific media directory
+    app_media_folder = os.path.join(settings.BASE_DIR, app_name, "media")
 
-    # Create a student-specific folder
-    student_folder = os.path.join(base_media_path, instance.name)
+    # Create a folder for each student inside the app's media directory
+    student_folder = os.path.join(app_media_folder, instance.name)
 
     # Ensure the directory exists
-    os.makedirs(student_folder, exist_ok=True)  # Safer way to create folder
+    if not os.path.exists(student_folder):
+        os.makedirs(student_folder)  # Create folder if it doesn't exist
 
     # Return the path where the image will be saved
-    return os.path.join(instance.name, filename)  # This ensures Django uses MEDIA_ROOT as base
+    return os.path.join(student_folder, filename)
 
 def validate_image_file(value):
     """Validate uploaded image file size and format"""
