@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %} Index {% endblock title %}
+
+{% block content %}
+
+<div class="bg-gray-900 text-white min-h-screen flex pt-16">
+    <!-- Left Sidebar (Fixed) -->
+    <div class="w-1/4 p-4 hidden lg:block h-screen sticky top-16 overflow-hidden">
+        <ul class="space-y-4">
+            <li class="flex items-center space-x-3"><i class="fas fa-user-friends"></i> <span>Friends</span></li>
+            <li class="flex items-center space-x-3"><i class="fas fa-bookmark"></i> <span>Saved</span></li>
+            <li class="flex items-center space-x-3"><i class="fas fa-clock"></i> <span>Memories</span></li>
+            <li class="flex items-center space-x-3"><i class="fas fa-users"></i> <span>Groups</span></li>
+            <li class="flex items-center space-x-3"><i class="fas fa-tv"></i> <span>Video</span></li>
+            <li class="flex items-center space-x-3"><i class="fas fa-store"></i> <span>Marketplace</span></li>
+        </ul>
+    </div>
+
+    <!-- Main Content (Scrollable) -->
+    <div class="w-full lg:w-2/4 p-4 h-screen overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden scrollbar-none">
+        <!-- Post Input -->
+        <div class="bg-gray-800 p-4 rounded-xl w-full">
+            <input class="w-full bg-gray-700 text-white p-2 rounded-xl focus:outline-none" 
+                   placeholder="What's on your mind?">
+        </div>
+
+        <!-- Stories Section -->
+        <div class="mt-4 flex space-x-2 overflow-x-auto w-full">
+            <div class="w-[150px] h-[220px] bg-gray-700 rounded-lg flex items-center justify-center">Story 1</div>
+            <div class="w-[150px] h-[220px] bg-gray-700 rounded-lg flex items-center justify-center">Story 2</div>
+            <div class="w-[150px] h-[220px] bg-gray-700 rounded-lg flex items-center justify-center">Story 3</div>
+            <div class="w-[150px] h-[220px] bg-gray-700 rounded-lg flex items-center justify-center">Story 4</div>
+        </div>
+
+        <!-- Posts Section -->
+        <div class="mt-4 space-y-4">
+            <div class="bg-gray-800 p-4 rounded-xl w-full">
+                <!-- Post Author & Date -->
+                <p class="text-sm text-gray-400">Hasan - 25-04-25</p>
+                
+                <!-- Post Text -->
+                <p class="mt-2">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit...
+                </p>
+        
+                <!-- Post Image -->
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI_d6BXjl75PdZzqm6zKJm48ETd8d1kZaj2g&s" 
+                     class="mt-2 rounded-lg w-full" 
+                     alt="Post Image">
+                
+                <!-- Reaction Section -->
+                <div class="flex items-center justify-between text-gray-400 text-sm mt-2">
+                    <!-- Emoji Reactions -->
+                    <div class="flex items-center space-x-2">
+                        <img src="https://cdn-icons-png.flaticon.com/512/889/889102.png" class="w-5 h-5" alt="Like">
+                        <img src="https://cdn-icons-png.flaticon.com/512/742/742751.png" class="w-5 h-5" alt="Love">
+                        <img src="https://cdn-icons-png.flaticon.com/512/742/742752.png" class="w-5 h-5" alt="Haha">
+                        <span>78</span> <!-- Reaction Count -->
+                    </div>
+        
+                    <!-- Comment Count -->
+                    <div class="flex items-center space-x-1">
+                        <i class="far fa-comment"></i>
+                        <span>14</span> <!-- Comment Count -->
+                    </div>
+                </div>
+        
+                <!-- Divider Line -->
+                <hr class="my-2 border-gray-700">
+        
+                <!-- Like, Comment, Share Buttons -->
+                <div class="flex justify-between text-gray-400 text-sm">
+                    <button class="flex items-center space-x-1 hover:text-white">
+                        <i class="far fa-thumbs-up"></i>
+                        <span>Like</span>
+                    </button>
+                    <button class="flex items-center space-x-1 hover:text-white">
+                        <i class="far fa-comment"></i>
+                        <span>Comment</span>
+                    </button>
+                    <button class="flex items-center space-x-1 hover:text-white">
+                        <i class="fas fa-link"></i>
+                        <span>Copy</span>
+                    </button>
+                    <button class="flex items-center space-x-1 hover:text-white">
+                        <i class="fas fa-share"></i>
+                        <span>Share</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4 space-y-4">
+            <div class="bg-gray-800 p-4 rounded-xl w-full">
+                <!-- Post Author & Date -->
+                <p class="text-sm text-gray-400">Hasan - 25-04-25</p>
+                
+                <!-- Post Text -->
+                <p class="mt-2">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit...
+                </p>
+        
+                <!-- Post Image -->
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI_d6BXjl75PdZzqm6zKJm48ETd8d1kZaj2g&s" 
+                     class="mt-2 rounded-lg w-full" 
+                     alt="Post Image">
+                
+                <!-- Reaction Section -->
+                <div class="flex items-center justify-between text-gray-400 text-sm mt-2">
+                    <!-- Emoji Reactions -->
+                    <div class="flex items-center space-x-2">
+                        <img src="https://cdn-icons-png.flaticon.com/512/889/889102.png" class="w-5 h-5" alt="Like">
+                        <img src="https://cdn-icons-png.flaticon.com/512/742/742751.png" class="w-5 h-5" alt="Love">
+                        <img src="https://cdn-icons-png.flaticon.com/512/742/742752.png" class="w-5 h-5" alt="Haha">
+                        <span>78</span> <!-- Reaction Count -->
+                    </div>
+        
+                    <!-- Comment Count -->
+                    <div class="flex items-center space-x-1">
+                        <i class="far fa-comment"></i>
+                        <span>14</span> <!-- Comment Count -->
+                    </div>
+                </div>
+        
+                <!-- Divider Line -->
+                <hr class="my-2 border-gray-700">
+        
+                <!-- Like, Comment, Share Buttons -->
+                <div class="flex justify-between text-gray-400 text-sm">
+                    <button class="flex items-center space-x-1 hover:text-white">
+                        <i class="far fa-thumbs-up"></i>
+                        <span>Like</span>
+                    </button>
+                    <button class="flex items-center space-x-1 hover:text-white">
+                        <i class="far fa-comment"></i>
+                        <span>Comment</span>
+                    </button>
+                    <button class="flex items-center space-x-1 hover:text-white">
+                        <i class="fas fa-link"></i>
+                        <span>Copy</span>
+                    </button>
+                    <button class="flex items-center space-x-1 hover:text-white">
+                        <i class="fas fa-share"></i>
+                        <span>Share</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Right Sidebar (Fixed) -->
+    <div class="w-1/4 p-4 hidden lg:block h-screen sticky top-16 overflow-hidden">
+        <h3 class="text-lg font-bold">Sponsored</h3>
+        <div class="mt-2 h-24 bg-gray-700 rounded-lg"></div>
+        <div class="mt-2 h-24 bg-gray-700 rounded-lg"></div>
+
+        <h3 class="mt-4 text-lg font-bold">Birthdays</h3>
+        <p class="text-sm text-gray-400">No birthdays today</p>
+    </div>
+</div>
+
+
+{% endblock content %}

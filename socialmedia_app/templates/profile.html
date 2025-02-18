@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+
+{% block title %} Index {% endblock title %}
+
+{% block content %}
+
+<div class="container mx-auto">
+    <div class="bg-gray-900 text-white min-h-screen">
+        <!-- Profile Cover Section -->
+        <div class="relative">
+            <!-- Cover Photo -->
+            <img src="https://cdn.pixabay.com/photo/2016/09/22/10/44/banner-1686943_1280.jpg" class="w-full h-60 object-cover" alt="Cover Photo">
+        
+            <!-- Profile Section -->
+            <div class="absolute left-4 bottom-[-120px] flex items-center">
+                <!-- Profile Picture with Camera Icon -->
+                <div class="relative">
+                    <img src="https://t4.ftcdn.net/jpg/02/14/74/61/360_F_214746128_31JkeaP6rU0NzzzdFC4khGkmqc8noe6h.jpg" 
+                         class="w-40 h-40 object-cover rounded-full border-4 border-gray-900" alt="Profile Picture">
+                    
+                    <!-- Camera Icon (Profile Change Button) -->
+                    <div class="absolute bottom-2 right-2 bg-gray-800 p-1 rounded-full border border-gray-700">
+                        <i style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v4/yC/r/uVnZalrQn4q.png&quot;); background-position: 5px -18px; background-size: auto; width: 30px; height: 20px; background-repeat: no-repeat; display: inline-block;"></i>
+                    </div>
+                </div>
+        
+                <!-- Name & Friends Count -->
+                <div class="ml-4 mt-8">
+                    <h1 class="text-2xl font-bold">Hâ Š Âñ</h1>
+                    <p class="text-gray-400 text-sm">276 friends</p>
+        
+                    <!-- Friends List (Horizontal) -->
+                    <div class="flex mt-2">
+                        <img src="https://randomuser.me/api/portraits/men/1.jpg" class="w-10 h-10 object-cover rounded-full border-2 border-gray-800 z-10">
+                        <img src="https://randomuser.me/api/portraits/women/2.jpg" class="w-10 h-10 object-cover rounded-full border-2 border-gray-800 -ml-3 z-9">
+                        <img src="https://randomuser.me/api/portraits/men/3.jpg" class="w-10 h-10 object-cover rounded-full border-2 border-gray-800 -ml-3 z-8">
+                        <img src="https://randomuser.me/api/portraits/women/4.jpg" class="w-10 h-10 object-cover rounded-full border-2 border-gray-800 -ml-3 z-7">
+                        <img src="https://randomuser.me/api/portraits/men/5.jpg" class="w-10 h-10 object-cover rounded-full border-2 border-gray-800 -ml-3 z-6">
+                        <img src="https://randomuser.me/api/portraits/women/6.jpg" class="w-10 h-10 object-cover rounded-full border-2 border-gray-800 -ml-3 z-5">
+                        <img src="https://randomuser.me/api/portraits/men/7.jpg" class="w-10 h-10 object-cover rounded-full border-2 border-gray-800 -ml-3 z-4">
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+    
+        <!-- Profile Action Buttons & Tabs -->
+        <div class="bg-gray-800 px-4 pt-40 pb-2 flex justify-between items-center">
+            <div class="flex space-x-4">
+                <button class="bg-blue-600 px-4 py-2 rounded-md hover:bg-blue-500">Add Friend</button>
+                <button class="bg-gray-700 px-4 py-2 rounded-md hover:bg-gray-600">Message</button>
+            </div>
+        </div>
+    
+        <!-- Profile Navigation Tabs -->
+        <div class="bg-gray-800 px-4 py-2 flex space-x-6 text-gray-400">
+            <button class="text-white border-b-2 border-blue-500 pb-1">Posts</button>
+            <button class="hover:text-white">About</button>
+            <button class="hover:text-white">Friends</button>
+            <button class="hover:text-white">Photos</button>
+            <button class="hover:text-white">Videos</button>
+            <button class="hover:text-white">More</button>
+        </div>
+    
+        <!-- Main Profile Content -->
+        <div class="flex px-4 mt-4">
+            <!-- Left Sidebar -->
+            <div class="w-1/4 hidden lg:block">
+                <div class="bg-gray-800 p-4 rounded-lg">
+                    <h2 class="text-lg font-bold mb-2">Intro</h2>
+                    <p class="text-sm text-gray-400">"Passionate about coding and problem-solving."</p>
+                    <ul class="mt-2 text-sm text-gray-400 space-y-1">
+                        <li><i class="fas fa-briefcase"></i> Works at <b>Tech Company</b></li>
+                        <li><i class="fas fa-graduation-cap"></i> Studied at <b>XYZ University</b></li>
+                        <li><i class="fas fa-home"></i> Lives in <b>Dhaka, Bangladesh</b></li>
+                        <li><i class="fas fa-heart"></i> Married</li>
+                    </ul>
+                </div>
+    
+                <div class="bg-gray-800 p-4 rounded-lg mt-4">
+                    <h2 class="text-lg font-bold mb-2">Photos</h2>
+                    <div class="grid grid-cols-3 gap-2">
+                        <img src="https://t4.ftcdn.net/jpg/02/14/74/61/360_F_214746128_31JkeaP6rU0NzzzdFC4khGkmqc8noe6h.jpg" class="rounded-lg">
+                        <img src="https://t4.ftcdn.net/jpg/02/14/74/61/360_F_214746128_31JkeaP6rU0NzzzdFC4khGkmqc8noe6h.jpg" class="rounded-lg">
+                        <img src="https://t4.ftcdn.net/jpg/02/14/74/61/360_F_214746128_31JkeaP6rU0NzzzdFC4khGkmqc8noe6h.jpg" class="rounded-lg">
+                        <img src="https://t4.ftcdn.net/jpg/02/14/74/61/360_F_214746128_31JkeaP6rU0NzzzdFC4khGkmqc8noe6h.jpg" class="rounded-lg">
+                        <img src="https://t4.ftcdn.net/jpg/02/14/74/61/360_F_214746128_31JkeaP6rU0NzzzdFC4khGkmqc8noe6h.jpg" class="rounded-lg">
+                        <img src="https://t4.ftcdn.net/jpg/02/14/74/61/360_F_214746128_31JkeaP6rU0NzzzdFC4khGkmqc8noe6h.jpg" class="rounded-lg">
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Main Timeline Section -->
+            <div class="w-full lg:w-2/4 p-4 h-screen overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden scrollbar-none">
+                <!-- Create Post Box -->
+                <div class="bg-gray-800 p-4 rounded-lg">
+                    <input class="w-full bg-gray-700 p-2 rounded-lg text-white" placeholder="What's on your mind?">
+                </div>
+    
+                <!-- Posts Section -->
+                <div class="mt-4 space-y-4">
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <div class="flex items-center space-x-2">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI_d6BXjl75PdZzqm6zKJm48ETd8d1kZaj2g&s" class="w-10 h-10 rounded-full">
+                            <div>
+                                <p class="font-bold">Hasan Ahmed</p>
+                                <p class="text-xs text-gray-400">2 hours ago</p>
+                            </div>
+                        </div>
+                        <p class="mt-2">Enjoying the sunset at the beach! 🌅</p>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI_d6BXjl75PdZzqm6zKJm48ETd8d1kZaj2g&s" class="mt-2 rounded-lg w-full">
+    
+                        <!-- Reactions & Comments -->
+                        <div class="flex items-center justify-between text-gray-400 text-sm mt-2">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://cdn-icons-png.flaticon.com/512/889/889102.png" class="w-5 h-5">
+                                <img src="https://cdn-icons-png.flaticon.com/512/742/742751.png" class="w-5 h-5">
+                                <img src="https://cdn-icons-png.flaticon.com/512/742/742752.png" class="w-5 h-5">
+                                <span>120</span>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <i class="far fa-comment"></i>
+                                <span>45</span>
+                            </div>
+                        </div>
+    
+                        <!-- Like, Comment, Share Buttons -->
+                        <hr class="my-2 border-gray-700">
+                        <div class="flex justify-between text-gray-400 text-sm">
+                            <button class="flex items-center space-x-1 hover:text-white">
+                                <i class="far fa-thumbs-up"></i>
+                                <span>Like</span>
+                            </button>
+                            <button class="flex items-center space-x-1 hover:text-white">
+                                <i class="far fa-comment"></i>
+                                <span>Comment</span>
+                            </button>
+                            <button class="flex items-center space-x-1 hover:text-white">
+                                <i class="fas fa-share"></i>
+                                <span>Share</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="mt-4 space-y-4">
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <div class="flex items-center space-x-2">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI_d6BXjl75PdZzqm6zKJm48ETd8d1kZaj2g&s" class="w-10 h-10 rounded-full">
+                            <div>
+                                <p class="font-bold">Hasan Ahmed</p>
+                                <p class="text-xs text-gray-400">2 hours ago</p>
+                            </div>
+                        </div>
+                        <p class="mt-2">Enjoying the sunset at the beach! 🌅</p>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI_d6BXjl75PdZzqm6zKJm48ETd8d1kZaj2g&s" class="mt-2 rounded-lg w-full">
+    
+                        <!-- Reactions & Comments -->
+                        <div class="flex items-center justify-between text-gray-400 text-sm mt-2">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://cdn-icons-png.flaticon.com/512/889/889102.png" class="w-5 h-5">
+                                <img src="https://cdn-icons-png.flaticon.com/512/742/742751.png" class="w-5 h-5">
+                                <img src="https://cdn-icons-png.flaticon.com/512/742/742752.png" class="w-5 h-5">
+                                <span>120</span>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <i class="far fa-comment"></i>
+                                <span>45</span>
+                            </div>
+                        </div>
+    
+                        <!-- Like, Comment, Share Buttons -->
+                        <hr class="my-2 border-gray-700">
+                        <div class="flex justify-between text-gray-400 text-sm">
+                            <button class="flex items-center space-x-1 hover:text-white">
+                                <i class="far fa-thumbs-up"></i>
+                                <span>Like</span>
+                            </button>
+                            <button class="flex items-center space-x-1 hover:text-white">
+                                <i class="far fa-comment"></i>
+                                <span>Comment</span>
+                            </button>
+                            <button class="flex items-center space-x-1 hover:text-white">
+                                <i class="fas fa-share"></i>
+                                <span>Share</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Right Sidebar -->
+            <div class="w-1/4 hidden lg:block">
+                <div class="bg-gray-800 p-4 rounded-lg">
+                    <div class="flex justify-between">
+                        <h2 class="text-lg font-bold mb-2">Friends <span class="text-gray-400 text-sm">(276)</span></h2>
+                        <a class="hover:underline hover:text-blue-500 cursor-pointer">See all</a>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="text-center">
+                            <img src="https://t4.ftcdn.net/jpg/02/14/74/61/360_F_214746128_31JkeaP6rU0NzzzdFC4khGkmqc8noe6h.jpg" class="rounded-lg">
+                            <p class="text-sm text-gray-300 mt-1">John Doe</p>
+                        </div>
+                        <div class="text-center">
+                            <img src="https://t4.ftcdn.net/jpg/02/14/74/61/360_F_214746128_31JkeaP6rU0NzzzdFC4khGkmqc8noe6h.jpg" class="rounded-lg">
+                            <p class="text-sm text-gray-300 mt-1">Sarah Smith</p>
+                        </div>
+                        <div class="text-center">
+                            <img src="https://t4.ftcdn.net/jpg/02/14/74/61/360_F_214746128_31JkeaP6rU0NzzzdFC4khGkmqc8noe6h.jpg" class="rounded-lg">
+                            <p class="text-sm text-gray-300 mt-1">Michael Brown</p>
+                        </div>
+                        <div class="text-center">
+                            <img src="https://t4.ftcdn.net/jpg/02/14/74/61/360_F_214746128_31JkeaP6rU0NzzzdFC4khGkmqc8noe6h.jpg" class="rounded-lg">
+                            <p class="text-sm text-gray-300 mt-1">Emily Davis</p>
+                        </div>
+                        <div class="text-center">
+                            <img src="https://t4.ftcdn.net/jpg/02/14/74/61/360_F_214746128_31JkeaP6rU0NzzzdFC4khGkmqc8noe6h.jpg" class="rounded-lg">
+                            <p class="text-sm text-gray-300 mt-1">David Lee</p>
+                        </div>
+                        <div class="text-center">
+                            <img src="https://t4.ftcdn.net/jpg/02/14/74/61/360_F_214746128_31JkeaP6rU0NzzzdFC4khGkmqc8noe6h.jpg" class="rounded-lg">
+                            <p class="text-sm text-gray-300 mt-1">Sophia Wilson</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock content %}
