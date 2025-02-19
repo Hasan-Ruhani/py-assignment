@@ -127,3 +127,15 @@ MEDIA_URL = '/media/'
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+# LOGOUT_REDIRECT_URL = 'index'
+
+
+#  allow username and email anyone for login
+AUTHENTICATION_BACKENDS = [
+    'socialmedia_app.authentication.EmailOrUsernameModelBackend',  # Allow email and username login
+    'django.contrib.auth.backends.ModelBackend',  # Default Django authentication
+]
+

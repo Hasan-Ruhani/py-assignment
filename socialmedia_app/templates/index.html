@@ -20,10 +20,7 @@
     <!-- Main Content (Scrollable) -->
     <div class="w-full lg:w-2/4 p-4 h-screen overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden scrollbar-none">
         <!-- Post Input -->
-        <div class="bg-gray-800 p-4 rounded-xl w-full">
-            <input class="w-full bg-gray-700 text-white p-2 rounded-xl focus:outline-none" 
-                   placeholder="What's on your mind?">
-        </div>
+        {% include "./post_input.html" %}
 
         <!-- Stories Section -->
         <div class="mt-4 flex space-x-2 overflow-x-auto w-full">

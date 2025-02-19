@@ -1,0 +1,71 @@
+{% load static %}
+
+<!-- Post Box (Click to Open Modal) -->
+<div class="bg-gray-800 p-4 rounded-lg flex items-center space-x-4 cursor-pointer hover:bg-gray-700" onclick="openModal()">
+    <!-- Profile Picture -->
+    <img src="{{ user.profile.profile_picture.url }}" alt="Profile" class="w-10 h-10 rounded-full border border-gray-500">
+    
+    <!-- Input Placeholder -->
+    <input class="w-full bg-gray-700 p-3 rounded-full text-white cursor-pointer placeholder-gray-400" placeholder="What's on your mind, {{ user.username }}?" readonly>
+</div>
+
+<!-- Post Modal (Hidden by Default) -->
+<div id="postModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+    <div class="bg-gray-900 p-6 rounded-lg shadow-lg w-[32rem]">
+        <!-- Modal Header -->
+        <div class="flex justify-between items-center border-b border-gray-700 pb-3">
+            <h2 class="text-lg text-white font-bold">Create post</h2>
+            <button onclick="closeModal()" class="text-gray-400 hover:text-white text-xl">✖</button>
+        </div>
+
+        <!-- User Profile Info -->
+        <div class="flex items-center space-x-3 mt-3">
+            <img src="{{ user.profile.profile_picture.url }}" alt="Profile" class="w-10 h-10 rounded-full border border-gray-500">
+            <div>
+                <h3 class="text-white font-semibold">{{ user.username }}</h3>
+                <button class="text-gray-300 bg-gray-700 text-sm px-2 py-1 rounded-lg hover:bg-gray-600">
+                    🌍 Public
+                </button>
+            </div>
+        </div>
+
+        <!-- Post Form -->
+        <form method="POST" action="{% url 'create_post' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+        
+            <!-- Post Content Textarea -->
+            <textarea name="description" class="w-full bg-transparent text-white p-3 mt-4 text-xl placeholder-gray-500 outline-none resize-none" rows="4" placeholder="What's on your mind, {{ user.username }}?"></textarea>
+        
+            <!-- Media & Extras Section -->
+            <div class="flex items-center space-x-4 mt-3 border-t border-gray-700 pt-3">
+                <span class="text-gray-300">Add to your post:</span>
+                <label for="fileInput" class="cursor-pointer">
+                    <img src="https://static.xx.fbcdn.net/rsrc.php/v4/y7/r/Ivw7nhRtXyo.png" class="w-6 h-6">
+                </label>
+                <input id="fileInput" type="file" name="image" class="hidden">
+                <img class="x1b0d499 xl1xv1r" alt="" src="https://static.xx.fbcdn.net/rsrc.php/v4/yq/r/b37mHA1PjfK.png" style="height: 24px; width: 24px;">
+                <img class="x1b0d499 xl1xv1r" alt="" src="https://static.xx.fbcdn.net/rsrc.php/v4/yd/r/Y4mYLVOhTwq.png" style="height: 24px; width: 24px;">
+                <img class="x1b0d499 xl1xv1r" alt="" src="https://static.xx.fbcdn.net/rsrc.php/v4/y1/r/8zlaieBcZ72.png" style="height: 24px; width: 24px;">
+                <img class="x1b0d499 xl1xv1r" alt="" src="https://static.xx.fbcdn.net/rsrc.php/v4/y1/r/8zlaieBcZ72.png" style="height: 24px; width: 24px;">
+                <i data-visualcompletion="css-img" class="x1b0d499 xl1xv1r" style="height: 24px; width: 24px; background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v4/yf/r/BfdKlc7-n-g.png&quot;); background-position: -25px -83px; background-size: auto; background-repeat: no-repeat; display: inline-block;"></i>
+            </div>
+        
+            <!-- Post Button -->
+            <button type="submit" class="w-full bg-blue-600 p-2 rounded-lg text-white font-bold mt-4 hover:bg-blue-500">
+                Post
+            </button>
+        </form>
+        
+    </div>
+</div>
+
+<!-- JavaScript for Modal -->
+<script>
+    function openModal() {
+        document.getElementById('postModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('postModal').classList.add('hidden');
+    }
+</script>
