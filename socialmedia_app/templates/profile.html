@@ -149,10 +149,11 @@
                                     <ul class="py-1 text-sm text-gray-200">
                                         <!-- Edit Post Option -->
                                         <li>
-                                            <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-700 cursor-pointer">
+                                            <button onclick="openEditModal('{{ post.id }}', '{{ post.description|escapejs }}')" class="flex items-center px-4 py-2 hover:bg-gray-700 cursor-pointer">
                                                 ✏️ Edit Post
-                                            </a>
-                                        </li>
+                                            </button>
+                                        </li>                                        
+                                        
                                         <!-- Move to Trash Option -->
                                         <li>
                                             <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-700 cursor-pointer text-red-400 hover:text-red-500">
@@ -251,8 +252,43 @@
     </div>
 </div>
 
+
+
  <!-- JavaScript to Toggle Dropdown -->
  <script>
+
+    function loadEditModal(postId) {
+        fetch(`/update-post/${postId}/`, {
+            headers: {
+                "X-Requested-With": "XMLHttpRequest"  // Tell Django it's an AJAX request
+            }
+        })
+        .then(response => response.text())
+        .then(html => {
+            // Remove existing modal if it exists
+            const existingModal = document.getElementById("postModal");
+            if (existingModal) {
+                existingModal.remove();
+            }
+
+            // Insert the fetched modal into the body
+            document.body.insertAdjacentHTML("beforeend", html);
+
+            // Show modal
+            document.getElementById("postModal").classList.remove("hidden");
+        })
+        .catch(error => console.error("Error loading edit modal:", error));
+    }
+
+    function closeModal() {
+        const modal = document.getElementById("postModal");
+        if (modal) {
+            modal.remove();
+        }
+    }
+
+
+
     document.addEventListener("DOMContentLoaded", function() {
         const dropdownButton = document.getElementById("dropdownButton");
         const dropdownMenu = document.getElementById("dropdownMenu");

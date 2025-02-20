@@ -1,16 +1,28 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse, JsonResponse
 
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import FormView, ListView, CreateView, UpdateView, DetailView
 from django.contrib.auth import login
+from django.core.exceptions import PermissionDenied
+from django.contrib.auth.models import User
+from django.views import View
 
 from .forms import PostForm, RegistrationForm, ProfileUpdateForm
 from .models import Post, Profile
+
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import View
+from django.contrib import messages
+from .models import Post
+from .forms import PostForm
+
+
 
 
 
@@ -46,24 +58,6 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('profile', kwargs={'username': self.request.user.username})  # Redirect to profile page after update
-
-
-
-class CreatePostView(LoginRequiredMixin, CreateView):
-    model = Post
-    form_class = PostForm
-    template_name = "post_input.html"
-    success_url = reverse_lazy('home')  # Redirect after post creation
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user  # ✅ Assign the logged-in user
-        messages.success(self.request, "Post created successfully!")
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        messages.error(self.request, "Failed to create post. Please check your input.")
-        return super().form_invalid(form)
-
 
 
 class RegisterView(FormView):
