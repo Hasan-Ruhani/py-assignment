@@ -1,4 +1,3 @@
-{% load static %}
 
 <!-- Post Box (Click to Open Modal) -->
 <div class="bg-gray-800 p-4 rounded-lg flex items-center space-x-4 cursor-pointer hover:bg-gray-700" onclick="openCreateModal()">
@@ -11,28 +10,25 @@
 
 
 
+
 <script>
     function openCreateModal() {
         let modal = document.getElementById('postModal');
-        
+        if (!modal) {
+            console.error("Modal not found!");
+            return;
+        }
+
         // Reset modal for new post creation
-        document.getElementById('postId').value = "";
-        document.getElementById('postDescription').value = "";
-        document.getElementById('modalTitle').innerText = "Create post";
-        document.getElementById('submitButton').innerText = "Post";
+        let postIdField = document.getElementById('postId');
+        let postDescriptionField = document.getElementById('postDescription');
+        let modalTitle = document.getElementById('modalTitle');
+        let submitButton = document.getElementById('submitButton');
 
-        // Show the modal
-        modal.classList.remove('hidden');
-    }
-
-    function openEditModal(postId, description) {
-        let modal = document.getElementById('postModal');
-
-        // Set data for editing
-        document.getElementById('postId').value = postId;
-        document.getElementById('postDescription').value = description;
-        document.getElementById('modalTitle').innerText = "Edit post";
-        document.getElementById('submitButton').innerText = "Update";
+        if (postIdField) postIdField.value = "";
+        if (postDescriptionField) postDescriptionField.value = "";
+        if (modalTitle) modalTitle.innerText = "Create post";
+        if (submitButton) submitButton.innerText = "Post";
 
         // Show the modal
         modal.classList.remove('hidden');
@@ -40,37 +36,18 @@
 
     function closeModal() {
         let modal = document.getElementById('postModal');
+        if (!modal) {
+            console.error("Modal not found!");
+            return;
+        }
+
+        // Hide the modal
         modal.classList.add('hidden');
     }
 
-    function submitPost(event) {
-        event.preventDefault(); // Prevent default form submission
-
-        let form = document.getElementById("postForm");
-        let formData = new FormData(form);
-        let csrfToken = document.querySelector("[name=csrfmiddlewaretoken]").value;
-
-        fetch("/post/", {
-            method: "POST",
-            body: formData,
-            headers: { "X-CSRFToken": csrfToken }
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Update messages instantly
-            let messageBox = document.getElementById("messageContainer");
-            messageBox.innerHTML = data.messages;
-
-            if (data.success) {
-                closeModal();
-                document.getElementById("postForm").reset(); // Reset form after success
-            }
-        })
-        .catch(error => console.error("Error:", error));
-    }
-
-    document.getElementById("postForm").addEventListener("submit", submitPost);
+    
 </script>
+
 
 
 
