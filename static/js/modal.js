@@ -1,29 +1,27 @@
-document.addEventListener("DOMContentLoaded", function () {
-    let modal = document.getElementById('postModal');
-    let openPostModal = document.getElementById('openPostModal');
-    let closeModalBtn = document.getElementById('closeModal');
 
-    if (!modal || !openPostModal || !closeModalBtn) {
-        console.error("Modal elements not found! Check IDs in your HTML.");
+    function openCreateModal() {
+    let modal = document.getElementById('postModal');
+    if (!modal) {
+        console.error("Modal not found!");
+        return;
+    }
+    
+    // Ensure modal is displayed
+    modal.classList.remove('hidden');
+    modal.style.display = 'flex';  // Ensures it is visible
+}
+
+function closeModal() {
+    let modal = document.getElementById('postModal');
+    if (!modal) {
+        console.error("Modal not found!");
         return;
     }
 
-    function openCreateModal() {
-        document.getElementById('postId').value = "";
-        document.getElementById('postDescription').value = "";
-        document.getElementById('modalTitle').innerText = "Create post";
-        document.getElementById('submitButton').innerText = "Post";
+    // Hide the modal properly
+    modal.classList.add('hidden');
+    modal.style.display = 'none';  // Ensures it is hidden
+}
 
-        modal.classList.remove('hidden');
-        modal.style.display = "flex"; 
-    }
 
-    function closeModal() {
-        modal.classList.add('hidden');
-        modal.style.display = "none"; 
-    }
-
-    // Attach event listeners
-    openPostModal.addEventListener("click", openCreateModal);
-    closeModalBtn.addEventListener("click", closeModal);
-});
+    

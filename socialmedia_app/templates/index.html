@@ -20,7 +20,10 @@
     <!-- Main Content (Scrollable) -->
     <div class="w-full lg:w-2/4 p-4 h-screen overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden scrollbar-none">
         <!-- Post Input -->
-        {% include "./post_input.html" %}
+         {% if user.is_authenticated %}
+            {% include "./post_input.html" %}
+         {% endif %}
+        
 
         <!-- Stories Section -->
         <div class="mt-4 flex space-x-2 overflow-x-auto w-full">
@@ -31,99 +34,42 @@
         </div>
 
         <!-- Posts Section -->
+        {% for post in posts %}
         <div class="mt-4 space-y-4">
-            <div class="bg-gray-800 p-4 rounded-xl w-full">
-                <!-- Post Author & Date -->
-                <p class="text-sm text-gray-400">Hasan - 25-04-25</p>
-                
-                <!-- Post Text -->
-                <p class="mt-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit...
-                </p>
-        
-                <!-- Post Image -->
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI_d6BXjl75PdZzqm6zKJm48ETd8d1kZaj2g&s" 
-                     class="mt-2 rounded-lg w-full" 
-                     alt="Post Image">
-                
-                <!-- Reaction Section -->
-                <div class="flex items-center justify-between text-gray-400 text-sm mt-2">
-                    <!-- Emoji Reactions -->
+            <div class="bg-gray-800 p-4 rounded-lg">
+                <div class="flex justify-between">
                     <div class="flex items-center space-x-2">
-                        <img src="https://cdn-icons-png.flaticon.com/512/889/889102.png" class="w-5 h-5" alt="Like">
-                        <img src="https://cdn-icons-png.flaticon.com/512/742/742751.png" class="w-5 h-5" alt="Love">
-                        <img src="https://cdn-icons-png.flaticon.com/512/742/742752.png" class="w-5 h-5" alt="Haha">
-                        <span>78</span> <!-- Reaction Count -->
-                    </div>
-        
-                    <!-- Comment Count -->
-                    <div class="flex items-center space-x-1">
-                        <i class="far fa-comment"></i>
-                        <span>14</span> <!-- Comment Count -->
-                    </div>
+                        <a href="{% url 'profile' post.user.username %}">
+                            <img src="{{ post.user.profile.profile_picture.url }}" class="w-10 h-10 rounded-full">
+                        </a>
+                        
+                        <div>
+                            <a href="{% url 'profile' post.user.username %}" class="font-bold">{{ post.user.username }}</a>
+                            <p class="text-xs text-gray-400">{{ post.created_at|date:"F j, Y" }}</p>
+                        </div>
+                    </div>                   
                 </div>
-        
-                <!-- Divider Line -->
-                <hr class="my-2 border-gray-700">
-        
-                <!-- Like, Comment, Share Buttons -->
-                <div class="flex justify-between text-gray-400 text-sm">
-                    <button class="flex items-center space-x-1 hover:text-white">
-                        <i class="far fa-thumbs-up"></i>
-                        <span>Like</span>
-                    </button>
-                    <button class="flex items-center space-x-1 hover:text-white">
-                        <i class="far fa-comment"></i>
-                        <span>Comment</span>
-                    </button>
-                    <button class="flex items-center space-x-1 hover:text-white">
-                        <i class="fas fa-link"></i>
-                        <span>Copy</span>
-                    </button>
-                    <button class="flex items-center space-x-1 hover:text-white">
-                        <i class="fas fa-share"></i>
-                        <span>Share</span>
-                    </button>
-                </div>
-            </div>
-        </div>
+                <p class="mt-2">{{ post.description }}</p>
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" class="mt-2 rounded-lg w-full">
+                {% endif %}
 
-        <div class="mt-4 space-y-4">
-            <div class="bg-gray-800 p-4 rounded-xl w-full">
-                <!-- Post Author & Date -->
-                <p class="text-sm text-gray-400">Hasan - 25-04-25</p>
-                
-                <!-- Post Text -->
-                <p class="mt-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit...
-                </p>
-        
-                <!-- Post Image -->
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI_d6BXjl75PdZzqm6zKJm48ETd8d1kZaj2g&s" 
-                     class="mt-2 rounded-lg w-full" 
-                     alt="Post Image">
-                
-                <!-- Reaction Section -->
+                <!-- Reactions & Comments -->
                 <div class="flex items-center justify-between text-gray-400 text-sm mt-2">
-                    <!-- Emoji Reactions -->
                     <div class="flex items-center space-x-2">
-                        <img src="https://cdn-icons-png.flaticon.com/512/889/889102.png" class="w-5 h-5" alt="Like">
-                        <img src="https://cdn-icons-png.flaticon.com/512/742/742751.png" class="w-5 h-5" alt="Love">
-                        <img src="https://cdn-icons-png.flaticon.com/512/742/742752.png" class="w-5 h-5" alt="Haha">
-                        <span>78</span> <!-- Reaction Count -->
+                        <img src="https://cdn-icons-png.flaticon.com/512/889/889102.png" class="w-5 h-5">
+                        <img src="https://cdn-icons-png.flaticon.com/512/742/742751.png" class="w-5 h-5">
+                        <img src="https://cdn-icons-png.flaticon.com/512/742/742752.png" class="w-5 h-5">
+                        <span>120</span>
                     </div>
-        
-                    <!-- Comment Count -->
                     <div class="flex items-center space-x-1">
                         <i class="far fa-comment"></i>
-                        <span>14</span> <!-- Comment Count -->
+                        <span>45</span>
                     </div>
                 </div>
-        
-                <!-- Divider Line -->
-                <hr class="my-2 border-gray-700">
-        
+
                 <!-- Like, Comment, Share Buttons -->
+                <hr class="my-2 border-gray-700">
                 <div class="flex justify-between text-gray-400 text-sm">
                     <button class="flex items-center space-x-1 hover:text-white">
                         <i class="far fa-thumbs-up"></i>
@@ -134,16 +80,14 @@
                         <span>Comment</span>
                     </button>
                     <button class="flex items-center space-x-1 hover:text-white">
-                        <i class="fas fa-link"></i>
-                        <span>Copy</span>
-                    </button>
-                    <button class="flex items-center space-x-1 hover:text-white">
                         <i class="fas fa-share"></i>
                         <span>Share</span>
                     </button>
                 </div>
             </div>
         </div>
+    {% endfor %}
+        
         
     </div>
 

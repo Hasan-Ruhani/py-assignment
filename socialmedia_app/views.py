@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+import random
 
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -16,18 +17,27 @@ from .models import Post, Profile
 
 
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views import View
 from django.contrib import messages
 from .models import Post
 from .forms import PostForm
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 
 
 
 
-def home(request):
-    return render(request, 'index.html')
+class home(ListView):
+    model = Post
+    template_name = 'index.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        queryset = list(Post.objects.all())
+        random.shuffle(queryset)
+        return queryset
 
 class ProfileDetailView(DetailView):
     model = Profile
@@ -58,6 +68,66 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('profile', kwargs={'username': self.request.user.username})  # Redirect to profile page after update
+
+
+
+class ProfilePostCreateView(LoginRequiredMixin, View):
+    def post(self, request, username):
+        """Create a post only if the logged-in user matches the profile"""
+        profile_user = get_object_or_404(User, username=username)
+
+        if request.user != profile_user:
+            return JsonResponse({'success': False, 'message': "Unauthorized"}, status=403)
+
+        form = PostForm(request.POST, request.FILES)  # No `or None` here
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+            return JsonResponse({'success': True})
+
+        return JsonResponse({'success': False, 'errors': form.errors}, status=400)
+
+
+from django.views.decorators.csrf import csrf_exempt
+
+
+class ProfilePostUpdateView(LoginRequiredMixin, UserPassesTestMixin, View):
+    """Edit a post only if the logged-in user owns it"""
+
+    def test_func(self):
+        """Ensure the logged-in user is the owner of the post"""
+        post = get_object_or_404(Post, pk=self.kwargs['pk'])
+        return self.request.user == post.user  # Allow only the owner
+
+    def post(self, request, username, pk):
+        """Handle post update"""
+        profile_user = get_object_or_404(User, username=username)
+        post = get_object_or_404(Post, pk=pk, user=profile_user)
+
+        if request.user != profile_user:
+            return JsonResponse({'success': False, 'message': "Unauthorized"}, status=403)
+
+        form = PostForm(request.POST or None, request.FILES or None, instance=post)
+
+        if form.is_valid():
+            if 'image' not in request.FILES:  # Keep old image if no new one is uploaded
+                form.instance.image = post.image
+            form.save()
+            return JsonResponse({'success': True})
+
+        # DEBUG: Log errors in Django console
+        print("Form errors:", form.errors)
+
+        return JsonResponse({'success': False, 'errors': form.errors}, status=400)
+
+
+
+
+
+
+
+
 
 
 class RegisterView(FormView):

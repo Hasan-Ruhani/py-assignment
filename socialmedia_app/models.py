@@ -23,7 +23,7 @@ class Profile(models.Model):
 # Post Model (One user can have multiple posts)
 class Post(models.Model):
     description = models.TextField(blank=True)
-    image = models.ImageField(upload_to=post_image, default=None, null=True)
+    image = models.ImageField(upload_to=post_image, default=None, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
 
     created_at = models.DateTimeField(auto_now_add=True)

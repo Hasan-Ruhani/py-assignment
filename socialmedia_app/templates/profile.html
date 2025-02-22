@@ -15,10 +15,10 @@
             <div class="absolute left-4 bottom-[-120px] flex items-center">
                 <!-- Profile Picture with Camera Icon -->
                 <div class="relative">
-                    <img src="{{ user.profile.profile_picture.url }}" 
+                    <img src="{{ profile.user.profile.profile_picture.url }}" 
                          class="w-40 h-40 object-cover rounded-full border-4 border-gray-900" alt="Profile Picture">
-                    
-                    <!-- Camera Icon (Profile Change Button) -->
+                    {% if user.is_authenticated %}
+                      <!-- Camera Icon (Profile Change Button) -->
                     <form method="POST" enctype="multipart/form-data" class="absolute bottom-0 right-0 bg-gray-800 p-1 rounded-full border border-gray-700">
                         {% csrf_token %}
                         <input type="file" name="profile_picture" id="profileUpload" accept="image/*" class="hidden" onchange="this.form.submit();">
@@ -26,6 +26,11 @@
                             <i style="background-image: url('https://static.xx.fbcdn.net/rsrc.php/v4/yC/r/uVnZalrQn4q.png'); background-position: 5px -18px; background-size: auto; width: 30px; height: 20px; background-repeat: no-repeat; display: inline-block;"></i>
                         </label>
                     </form>
+                    {% else %}
+                        <div class="absolute bottom-[10px] right-[12px] p-1 rounded-full border-[3px] border-gray-700 h-6 w-6 bg-green-500"></div>
+                    {% endif %}
+                    
+                    
                 </div>
         
                 <!-- Name & Friends Count -->
@@ -132,7 +137,7 @@
                     <div class="bg-gray-800 p-4 rounded-lg">
                         <div class="flex justify-between">
                             <div class="flex items-center space-x-2">
-                                <img src="{{ user.profile.profile_picture.url }}" class="w-10 h-10 rounded-full">
+                                <img src="{{ post.user.profile.profile_picture.url }}" class="w-10 h-10 rounded-full">
                                 <div>
                                     <p class="font-bold">{{ user.username }}</p>
                                     <p class="text-xs text-gray-400">{{ post.created_at|date:"F j, Y" }}</p>
@@ -140,21 +145,21 @@
                             </div>
                             <div class="relative inline-block text-left">
                                 <!-- Three-Dot Button -->
-                                <button id="dropdownButton" class="relative font-extrabold text-xl w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-gray-700 border-2 border-transparent hover:border-blue-500 transition">
+                                <button class="dropdown-button relative font-extrabold text-xl w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-gray-700 border-2 border-transparent hover:border-blue-500 transition">
                                     <span class="text-xl">⋯</span>
                                 </button>
-                            
-                                <!-- Dropdown Menu (Initially Hidden) -->
-                                <div id="dropdownMenu" class="absolute right-0 mt-2 w-44 bg-gray-900 border border-gray-700 rounded-lg shadow-lg hidden">
+
+                                <!-- Dropdown Menu -->
+                                <div class="dropdown-menu absolute right-0 mt-2 w-44 bg-gray-900 border border-gray-700 rounded-lg shadow-lg hidden">
                                     <ul class="py-1 text-sm text-gray-200">
-                                        <!-- Edit Post Option -->
                                         <li>
-                                            <button onclick="openEditModal('{{ post.id }}', '{{ post.description|escapejs }}')" class="flex items-center px-4 py-2 hover:bg-gray-700 cursor-pointer">
+                                            <button onclick="openEditModal('{{ post.id }}', `{{ post.description|escapejs }}`, `{% if post.image %}{{ post.image.url }}{% else %}{% endif %}`)" 
+                                                    class="w-full flex items-center px-4 py-2 hover:bg-gray-700 cursor-pointer">
                                                 ✏️ Edit Post
                                             </button>
-                                        </li>                                        
+                                        </li>
+                                                                           
                                         
-                                        <!-- Move to Trash Option -->
                                         <li>
                                             <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-700 cursor-pointer text-red-400 hover:text-red-500">
                                                 🗑 Move to Trash
@@ -162,9 +167,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
-                            
-                                                      
+                            </div>                      
                         </div>
                         <p class="mt-2">{{ post.description }}</p>
                         {% if post.image %}
@@ -256,57 +259,31 @@
 
  <!-- JavaScript to Toggle Dropdown -->
  <script>
-
-    function loadEditModal(postId) {
-        fetch(`/update-post/${postId}/`, {
-            headers: {
-                "X-Requested-With": "XMLHttpRequest"  // Tell Django it's an AJAX request
-            }
-        })
-        .then(response => response.text())
-        .then(html => {
-            // Remove existing modal if it exists
-            const existingModal = document.getElementById("postModal");
-            if (existingModal) {
-                existingModal.remove();
-            }
-
-            // Insert the fetched modal into the body
-            document.body.insertAdjacentHTML("beforeend", html);
-
-            // Show modal
-            document.getElementById("postModal").classList.remove("hidden");
-        })
-        .catch(error => console.error("Error loading edit modal:", error));
-    }
-
-    function closeModal() {
-        const modal = document.getElementById("postModal");
-        if (modal) {
-            modal.remove();
-        }
-    }
-
-
-
-    document.addEventListener("DOMContentLoaded", function() {
-        const dropdownButton = document.getElementById("dropdownButton");
-        const dropdownMenu = document.getElementById("dropdownMenu");
-
-        // Toggle dropdown when button is clicked
-        dropdownButton.addEventListener("click", function(event) {
-            event.stopPropagation();
-            dropdownMenu.classList.toggle("hidden");
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".dropdown-button").forEach(button => {
+            button.addEventListener("click", function (event) {
+                event.stopPropagation();
+                let dropdownMenu = this.nextElementSibling; // Select the menu right after the button
+                dropdownMenu.classList.toggle("hidden");
+    
+                // Close other dropdowns
+                document.querySelectorAll(".dropdown-menu").forEach(menu => {
+                    if (menu !== dropdownMenu) {
+                        menu.classList.add("hidden");
+                    }
+                });
+            });
         });
-
+    
         // Close dropdown when clicking outside
-        document.addEventListener("click", function(event) {
-            if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                dropdownMenu.classList.add("hidden");
-            }
+        document.addEventListener("click", function () {
+            document.querySelectorAll(".dropdown-menu").forEach(menu => {
+                menu.classList.add("hidden");
+            });
         });
     });
-</script>
+    </script>
+    
 
 
 {% endblock content %}
