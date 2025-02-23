@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %} Index {% endblock title %}
 
 {% block content %}
@@ -15,11 +15,17 @@
             <div class="absolute left-4 bottom-[-120px] flex items-center">
                 <!-- Profile Picture with Camera Icon -->
                 <div class="relative">
-                    <img src="{{ profile.user.profile.profile_picture.url }}" 
-                         class="w-40 h-40 object-cover rounded-full border-4 border-gray-900" alt="Profile Picture">
-                    {% if user.is_authenticated %}
+
+                    {% if profile.profile_picture %}
+                        <img src="{{ profile.user.profile.profile_picture.url }}" 
+                        class="w-40 h-40 object-cover rounded-full border-4 border-gray-900" alt="Profile Picture">
+                    {% else %}
+                        <img src="{% static 'img/profile_default.webp' %}" alt="Default Profile" class="w-40 h-40 object-cover rounded-full border-4 border-gray-900">
+                    {% endif %}
+
+                    {% if profile_user.username == user.username %}
                       <!-- Camera Icon (Profile Change Button) -->
-                    <form method="POST" enctype="multipart/form-data" class="absolute bottom-0 right-0 bg-gray-800 p-1 rounded-full border border-gray-700">
+                    <form method="POST" action="{% url 'edit_profile' username=user.username %}" enctype="multipart/form-data" class="absolute bottom-0 right-0 bg-gray-800 p-1 rounded-full border border-gray-700">
                         {% csrf_token %}
                         <input type="file" name="profile_picture" id="profileUpload" accept="image/*" class="hidden" onchange="this.form.submit();">
                         <label for="profileUpload" class="cursor-pointer">
@@ -35,7 +41,7 @@
         
                 <!-- Name & Friends Count -->
                 <div class="ml-4 mt-8">
-                    <h1 class="text-2xl font-bold">{{ user.username }}</h1>
+                    <h1 class="text-2xl font-bold">{{ profile_user.username }}</h1>
                     <p class="text-gray-400 text-sm">276 friends</p>
         
                     <!-- Friends List (Horizontal) -->
@@ -127,7 +133,9 @@
             <!-- Main Timeline Section -->
             <div class="w-full lg:w-2/4 p-4 h-screen overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden scrollbar-none">
                 <!-- Create Post Box -->
-                {% include "./post_input.html" %}
+                 {% if user.is_authenticated %}
+                    {% include "./post_input.html" %}
+                 {% endif %}
     
                 <!-- Posts Section -->
                 
@@ -137,37 +145,44 @@
                     <div class="bg-gray-800 p-4 rounded-lg">
                         <div class="flex justify-between">
                             <div class="flex items-center space-x-2">
-                                <img src="{{ post.user.profile.profile_picture.url }}" class="w-10 h-10 rounded-full">
+                                {% if user.profile.profile_picture %}
+                                    <img src="{{ post.user.profile.profile_picture.url }}" class="w-10 h-10 object-cover rounded-full">
+                                {% else %}
+                                    <img src="{% static 'img/profile_default.webp' %}" alt="Default Profile" class="w-8 h-8 rounded-full cursor-pointer">
+                                {% endif %}
+                                
                                 <div>
-                                    <p class="font-bold">{{ user.username }}</p>
+                                    <p class="font-bold">{{ post.user.username }}</p>
                                     <p class="text-xs text-gray-400">{{ post.created_at|date:"F j, Y" }}</p>
                                 </div>
                             </div>
-                            <div class="relative inline-block text-left">
-                                <!-- Three-Dot Button -->
-                                <button class="dropdown-button relative font-extrabold text-xl w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-gray-700 border-2 border-transparent hover:border-blue-500 transition">
-                                    <span class="text-xl">⋯</span>
-                                </button>
+                            {% if profile_user.username == user.username %}
+                                <div class="relative inline-block text-left">
+                                    <!-- Three-Dot Button -->
+                                    <button class="dropdown-button relative font-extrabold text-xl w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-gray-700 border-2 border-transparent hover:border-blue-500 transition">
+                                        <span class="text-xl">⋯</span>
+                                    </button>
 
-                                <!-- Dropdown Menu -->
-                                <div class="dropdown-menu absolute right-0 mt-2 w-44 bg-gray-900 border border-gray-700 rounded-lg shadow-lg hidden">
-                                    <ul class="py-1 text-sm text-gray-200">
-                                        <li>
-                                            <button onclick="openEditModal('{{ post.id }}', `{{ post.description|escapejs }}`, `{% if post.image %}{{ post.image.url }}{% else %}{% endif %}`)" 
-                                                    class="w-full flex items-center px-4 py-2 hover:bg-gray-700 cursor-pointer">
-                                                ✏️ Edit Post
-                                            </button>
-                                        </li>
-                                                                           
-                                        
-                                        <li>
-                                            <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-700 cursor-pointer text-red-400 hover:text-red-500">
-                                                🗑 Move to Trash
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>                      
+                                    <!-- Dropdown Menu -->
+                                    <div class="dropdown-menu absolute right-0 mt-2 w-44 bg-gray-900 border border-gray-700 rounded-lg shadow-lg hidden">
+                                        <ul class="py-1 text-sm text-gray-200">
+                                            <li>
+                                                <button onclick="openEditModal('{{ post.id }}', `{{ post.description|escapejs }}`, `{% if post.image %}{{ post.image.url }}{% else %}{% endif %}`)" 
+                                                        class="w-full flex items-center px-4 py-2 hover:bg-gray-700 cursor-pointer">
+                                                    ✏️ Edit Post
+                                                </button>
+                                            </li>
+                                                                            
+                                            
+                                            <li>
+                                                <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-700 cursor-pointer text-red-400 hover:text-red-500">
+                                                    🗑 Move to Trash
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>       
+                                {% endif %}               
                         </div>
                         <p class="mt-2">{{ post.description }}</p>
                         {% if post.image %}

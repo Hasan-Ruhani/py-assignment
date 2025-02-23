@@ -5,9 +5,9 @@ import random
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from django.urls import reverse_lazy
-from django.views.generic import FormView, ListView, CreateView, UpdateView, DetailView
-from django.contrib.auth import login
+from django.urls import reverse_lazy, reverse
+from django.views.generic import FormView, ListView, CreateView, UpdateView, DetailView, DeleteView
+from django.contrib.auth import login, get_backends
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.models import User
 from django.views import View
@@ -39,25 +39,36 @@ class home(ListView):
         random.shuffle(queryset)
         return queryset
 
+from django.shortcuts import get_object_or_404
+from django.views.generic import DetailView
+from .models import Profile, Post
+
 class ProfileDetailView(DetailView):
     model = Profile
     template_name = 'profile.html'
     context_object_name = 'profile'  # Pass profile data to the template
 
     def get_object(self):
-        return get_object_or_404(Profile, user__username=self.kwargs['username'])  # Allow viewing any profile
+        """Allow anyone to view the profile"""
+        return get_object_or_404(Profile, user__username=self.kwargs['username'])
 
     def get_context_data(self, **kwargs):
+        """Pass additional data to the template"""
         context = super().get_context_data(**kwargs)
-        context['posts'] = Post.objects.filter(user=self.object.user).order_by('-created_at')  # Get user's posts
-        context['can_edit'] = self.request.user.is_authenticated and self.request.user == self.object.user  # Check if logged-in user owns the profile
+        profile_user = self.get_object().user  # Get the profile owner
+
+        context['profile_user'] = profile_user  # Profile owner's data
+        context['posts'] = Post.objects.filter(user=profile_user).order_by('-created_at')  # Get user's posts
+        context['can_edit'] = self.request.user.is_authenticated and self.request.user == profile_user  # Check if logged-in user owns the profile
+        context['is_authenticated'] = self.request.user.is_authenticated  # Pass authentication status
         return context
+
 
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = ProfileUpdateForm
-    template_name = 'profile_edit.html'
+    template_name = 'profile.html'
 
     def get_object(self):
         return self.request.user.profile  # Only allow users to edit their own profile
@@ -88,10 +99,6 @@ class ProfilePostCreateView(LoginRequiredMixin, View):
 
         return JsonResponse({'success': False, 'errors': form.errors}, status=400)
 
-
-from django.views.decorators.csrf import csrf_exempt
-
-
 class ProfilePostUpdateView(LoginRequiredMixin, UserPassesTestMixin, View):
     """Edit a post only if the logged-in user owns it"""
 
@@ -121,29 +128,37 @@ class ProfilePostUpdateView(LoginRequiredMixin, UserPassesTestMixin, View):
 
         return JsonResponse({'success': False, 'errors': form.errors}, status=400)
 
+class DeletePost(LoginRequiredMixin, DeleteView):
+    model = Post
+    template_name = 'profile.html'
 
-
-
-
-
-
-
-
+    def get_success_url(self):
+        referer = self.request.META.get('HTTP_REFERER')
+        if referer:
+            return referer
+        return reverse('home')
+    
 
 class RegisterView(FormView):
     template_name = "register.html"
     form_class = RegistrationForm
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('home')  # Redirect after successful registration
 
     def form_valid(self, form):
         user = form.save()
-        login(self.request, user)
+
+        # Explicitly set the authentication backend
+        backend = get_backends()[0]  # Use the first authentication backend
+        user.backend = backend.__module__ + "." + backend.__class__.__name__
+
+        login(self.request, user)  # Log in the new user
         messages.success(self.request, "Registration successful!")
         return super().form_valid(form)
 
     def form_invalid(self, form):
         messages.error(self.request, "Registration failed! Please try again later.")
         return self.render_to_response(self.get_context_data(form=form))
+
     
 
 class CustomLoginView(LoginView):

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %} Index {% endblock title %}
 
 {% block content %}
@@ -40,7 +40,11 @@
                 <div class="flex justify-between">
                     <div class="flex items-center space-x-2">
                         <a href="{% url 'profile' post.user.username %}">
-                            <img src="{{ post.user.profile.profile_picture.url }}" class="w-10 h-10 rounded-full">
+                            {% if post.user.profile.profile_picture %}
+                                <img src="{{ post.user.profile.profile_picture.url }}" class="w-10 h-10 object-cover rounded-full">
+                            {% else %}
+                                <img src="{% static 'img/profile_default.webp' %}" alt="Default Profile" class="w-8 h-8 rounded-full cursor-pointer">
+                            {% endif %}
                         </a>
                         
                         <div>
