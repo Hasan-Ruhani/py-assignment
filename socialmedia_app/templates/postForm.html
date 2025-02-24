@@ -19,7 +19,7 @@
             {% endif %}
             
             <div>
-                <h3 class="text-white font-semibold">{{ user.username }}</h3>
+                <h3 class="text-white font-semibold">{{ user.username|capfirst }}</h3>
             </div>
         </div>
 
@@ -176,6 +176,7 @@ function openEditModal(postId, description, imageUrl = null) {
 
     // Update the modal title dynamically
     document.getElementById("modalTitle").innerText = postId ? "Edit Post" : "Create Post";
+    document.getElementById("submitButton").innerText = postId ? "Update" : "Post";
 
     // Handle Existing Image Preview (Show if exists)
     let imagePreview = document.getElementById("imagePreview");

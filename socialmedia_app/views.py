@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 import random
-
+from django.http import Http404
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
@@ -123,21 +123,29 @@ class ProfilePostUpdateView(LoginRequiredMixin, UserPassesTestMixin, View):
             form.save()
             return JsonResponse({'success': True})
 
-        # DEBUG: Log errors in Django console
         print("Form errors:", form.errors)
 
         return JsonResponse({'success': False, 'errors': form.errors}, status=400)
 
-class DeletePost(LoginRequiredMixin, DeleteView):
-    model = Post
-    template_name = 'profile.html'
+class DeletePost(LoginRequiredMixin, View):
+    """Delete a post only if the logged-in user owns it"""
 
-    def get_success_url(self):
-        referer = self.request.META.get('HTTP_REFERER')
-        if referer:
-            return referer
-        return reverse('home')
-    
+    def post(self, request, username, pk):
+        """Handle post deletion"""
+
+        # Ensure the post belongs to the right user
+        profile_user = get_object_or_404(User, username=username)
+        post = get_object_or_404(Post, pk=pk, user=profile_user)
+
+        if request.user != profile_user:
+            messages.error(request, "Unauthorized to delete this post.")
+            return redirect(request.META.get('HTTP_REFERER', '/'))
+
+        # Delete the post
+        post.delete()
+        messages.success(self.request, 'Post deleted successfully')
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+        
 
 class RegisterView(FormView):
     template_name = "register.html"
