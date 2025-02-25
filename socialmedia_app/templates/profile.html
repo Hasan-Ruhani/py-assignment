@@ -14,7 +14,7 @@
             <!-- Profile Section -->
             <div class="absolute left-4 bottom-[-120px] flex items-center">
                 <!-- Profile Picture with Camera Icon -->
-                <div class="relative">
+                <div class="relative transition-transform duration-300 ease-in-out hover:scale-110">
 
                     {% if profile.profile_picture %}
                         <img src="{{ profile.user.profile.profile_picture.url }}" 
